@@ -3,6 +3,7 @@ package com.avantesb.rfidbankmicroservice.model.entity;
 import com.avantesb.rfidbankmicroservice.model.TransactionStatus;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.math.BigDecimal;

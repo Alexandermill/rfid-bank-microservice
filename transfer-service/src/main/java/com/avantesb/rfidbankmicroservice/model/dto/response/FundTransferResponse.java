@@ -1,12 +1,8 @@
 package com.avantesb.rfidbankmicroservice.model.dto.response;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
-@Getter
-@Setter
-@Builder
+@Data
 public class FundTransferResponse {
     private String message;
     private String transactionId;
