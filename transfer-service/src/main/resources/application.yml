@@ -1,9 +1,11 @@
 server:
-  port: 8080
+  port: 8081
+
+core-banking-service: http://localhost:8080
 
 spring:
   application:
-    name: core-bank-service
+    name: transfer-bank-service
   datasource:
 #    url: jdbc:h2:file:/database/core_rfid_bank
     url: jdbc:h2:mem:DATABASE
@@ -14,14 +16,14 @@ spring:
       spring.jpa.database-platform: org.hibernate.dialect.H2Dialect
   h2:
     console.enabled: true
-  flyway:
-    enabled: true
-
-flyway:
-  user: sa
-  password: password
-  schemas: core_bank-schema
-#  url: jdbc:h2:mem:DATABASE
-#  url: jdbc:h2:file:/data/core_bank
-#  locations:
-#    filesystem: db/migration
+#  flyway:
+#    enabled: true
+#
+#flyway:
+#  user: sa
+#  password: password
+#  schemas: core_bank-schema
+##  url: jdbc:h2:mem:DATABASE
+##  url: jdbc:h2:file:/data/core_bank
+##  locations:
+##    filesystem: db/migration

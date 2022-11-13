@@ -3,6 +3,10 @@
   <component name="JpbDataSourceConfig">
     <data-sources>
       <data-source id="0d5d647b-973f-4532-81e4-42a101a7cec2" name="rfidbankmicroservice" url="jdbc:h2:file:/data/core_bank" driverClass="org.h2.Driver" />
+      <data-source id="3e8b02e8-4058-4cf5-bfc4-bb0f2c2e838a" name="rfidbankmicroservice_mem" url="jdbc:h2:mem:DATABASE" driverClass="org.h2.Driver" />
     </data-sources>
+    <data-source-infos>
+      <data-source-info id="3e8b02e8-4058-4cf5-bfc4-bb0f2c2e838a" persistence-unit-name="Default" />
+    </data-source-infos>
   </component>
 </project>

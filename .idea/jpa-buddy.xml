@@ -4,8 +4,8 @@
     <option name="flywayDirectory" value="db/migration" />
     <option name="defaultUnitInitialized" value="true" />
     <option name="sourceModelValue" value="Default" />
-    <option name="targetDbValue" value="0d5d647b-973f-4532-81e4-42a101a7cec2" />
-    <option name="snapshotDbValue" value="0d5d647b-973f-4532-81e4-42a101a7cec2" />
+    <option name="targetDbValue" value="3e8b02e8-4058-4cf5-bfc4-bb0f2c2e838a" />
+    <option name="snapshotDbValue" value="3e8b02e8-4058-4cf5-bfc4-bb0f2c2e838a" />
     <option name="snapshotModelValue" value="Default" />
   </component>
 </project>
