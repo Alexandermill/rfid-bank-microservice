@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="JpaBuddyIdeaProjectConfig">
+    <option name="flywayDirectory" value="db/migration" />
     <option name="defaultUnitInitialized" value="true" />
+    <option name="sourceModelValue" value="Default" />
+    <option name="targetDbValue" value="0d5d647b-973f-4532-81e4-42a101a7cec2" />
+    <option name="snapshotDbValue" value="0d5d647b-973f-4532-81e4-42a101a7cec2" />
+    <option name="snapshotModelValue" value="Default" />
   </component>
 </project>

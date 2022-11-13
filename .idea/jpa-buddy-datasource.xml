@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="JpbDataSourceConfig">
+    <data-sources>
+      <data-source id="0d5d647b-973f-4532-81e4-42a101a7cec2" name="rfidbankmicroservice" url="jdbc:h2:file:/data/core_bank" driverClass="org.h2.Driver" />
+    </data-sources>
+  </component>
+</project>
