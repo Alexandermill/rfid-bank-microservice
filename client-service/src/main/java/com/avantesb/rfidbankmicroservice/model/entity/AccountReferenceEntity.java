@@ -1,5 +1,6 @@
 package com.avantesb.rfidbankmicroservice.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -15,9 +16,18 @@ public class AccountReferenceEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
 
+    String number;
+
     @ManyToOne
     @JoinColumn(name = "client_id")
     ClientBankEntity client;
-    String number;
+
+    public AccountReferenceEntity() {
+    }
+
+    public AccountReferenceEntity(String number, ClientBankEntity client) {
+        this.number = number;
+        this.client = client;
+    }
 
 }

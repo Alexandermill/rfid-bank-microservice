@@ -1,5 +1,8 @@
 package com.avantesb.rfidbankmicroservice.model.mapper;
 
+import com.avantesb.rfidbankmicroservice.model.dto.ClientBank;
+import com.avantesb.rfidbankmicroservice.model.entity.ClientBankEntity;
+
 import java.util.Collection;
 import java.util.List;
 import java.util.Set;

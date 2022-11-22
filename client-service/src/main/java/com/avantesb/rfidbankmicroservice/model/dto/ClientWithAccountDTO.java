@@ -5,13 +5,14 @@ import lombok.Data;
 import java.util.List;
 
 @Data
-public class ClientBank {
+public class ClientWithAccountDTO {
+
     private Long id;
 
     private String firstName;
     private String lastName;
     private String email;
     private String identificationNumber;
-    private List<String> accountNumbers;
+    private List<AccountBank> accounts;
 
 }

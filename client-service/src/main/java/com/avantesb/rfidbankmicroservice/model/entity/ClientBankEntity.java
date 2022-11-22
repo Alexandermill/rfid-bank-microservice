@@ -23,4 +23,5 @@ public class ClientBankEntity {
 
     @OneToMany(mappedBy = "client", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<AccountReferenceEntity> accountsId;
+
 }
