@@ -1,12 +1,11 @@
 server:
-  port: 8081
+  port: 8083
 
 core-banking-service: http://localhost:8080
-account-banking-service: http://localhost:8082
 
 spring:
   application:
-    name: transfer-bank-service
+    name: client-bank-service
   datasource:
 #    url: jdbc:h2:file:/database/core_rfid_bank
     url: jdbc:h2:mem:DATABASE
