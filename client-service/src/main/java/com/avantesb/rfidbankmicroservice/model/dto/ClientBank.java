@@ -12,6 +12,6 @@ public class ClientBank {
     private String lastName;
     private String email;
     private String identificationNumber;
-    private List<AccountBank> accounts;
+    private List<Long> accountsId;
 
 }

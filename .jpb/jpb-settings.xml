@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="JpaLiquibaseChangesConfig">
+    <exclude-change idName="FK_BANK_TRANSACTION_ON_ACCOUNT" tagName="addForeignKeyConstraint" />
+    <exclude-change idName="fund_transfer" tagName="createTable" />
+    <exclude-change idName="bank_utility_account" tagName="createTable" />
+    <exclude-change idName="bank_transaction" tagName="createTable" />
+    <exclude-change idName="bank_account" tagName="createTable" />
+    <exclude-change idName="FK_BANK_ACCOUNT_ON_CLIENT" tagName="addForeignKeyConstraint" />
+  </component>
+</project>

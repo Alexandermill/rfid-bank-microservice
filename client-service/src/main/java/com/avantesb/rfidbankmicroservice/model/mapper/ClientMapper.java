@@ -11,14 +11,12 @@ import org.springframework.stereotype.Component;
 public class ClientMapper extends BaseMapper<ClientBankEntity, ClientBank>{
 
 
-    private AccountMapper accountMapper;
 
     @Override
     public ClientBankEntity convertToEntity(ClientBank dto, Object... args) {
         ClientBankEntity entity = new ClientBankEntity();
         if(dto != null){
             BeanUtils.copyProperties(dto, entity);
-            entity.setAccounts(accountMapper.convertToEntityList(dto.getAccounts()));
         }
 
         return entity;
@@ -30,7 +28,6 @@ public class ClientMapper extends BaseMapper<ClientBankEntity, ClientBank>{
 
         if(entity != null){
             BeanUtils.copyProperties(entity, dto);
-            dto.setAccounts(accountMapper.convertToDtoList(entity.getAccounts()));
 
         }
         return dto;
