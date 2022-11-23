@@ -9,7 +9,7 @@ spring:
     name: transfer-bank-service
   datasource:
 #    url: jdbc:h2:file:/database/core_rfid_bank
-    url: jdbc:h2:mem:DATABASE
+    url: jdbc:h2:mem:TRANSFER
     username: sa
     password: password
     driverClassName: org.h2.Driver

@@ -2,10 +2,8 @@ package com.avantesb.rfidbankmicroservice.service.client;
 
 import com.avantesb.rfidbankmicroservice.configuration.CustomFeignClientConfiguration;
 import com.avantesb.rfidbankmicroservice.model.dto.request.FundTransferRequest;
-import com.avantesb.rfidbankmicroservice.model.dto.response.AccountResponse;
 import com.avantesb.rfidbankmicroservice.model.dto.response.FundTransferResponse;
 import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
