@@ -32,5 +32,4 @@ public class AccountEntity {
 
     private Long clientId;
 
-
 }

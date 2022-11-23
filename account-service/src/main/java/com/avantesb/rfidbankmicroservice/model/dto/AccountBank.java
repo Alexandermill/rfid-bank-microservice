@@ -14,5 +14,5 @@ public class AccountBank {
     private AccountStatus status;
     private BigDecimal availableBalance;
     private BigDecimal actualBalance;
-    private ClientBank client;
+    private Long clientId;
 }

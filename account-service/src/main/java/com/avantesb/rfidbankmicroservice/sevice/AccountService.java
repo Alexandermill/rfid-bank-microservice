@@ -12,7 +12,9 @@ import com.avantesb.rfidbankmicroservice.model.repository.UtilityAccountEntityRe
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
@@ -43,5 +45,16 @@ public class AccountService {
 
     public List<AccountBank> getAccountsByClientId(Long clientId) {
         return accountMapper.convertToDtoList(accountRepository.findByClientId(clientId));
+    }
+
+    public List<AccountBank> getAccountsByClientId(List<Long> clientIds) {
+        List<AccountEntity> entities = clientIds.stream()
+                .map(id -> accountRepository.findByClientId(id))
+                .collect(Collectors.toList())
+                    .stream()
+                    .flatMap(Collection::stream)
+                    .collect(Collectors.toList());
+
+        return  accountMapper.convertToDtoList(entities);
     }
 }

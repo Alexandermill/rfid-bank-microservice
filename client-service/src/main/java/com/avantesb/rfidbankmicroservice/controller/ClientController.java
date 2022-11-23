@@ -36,5 +36,10 @@ public class ClientController {
         return ResponseEntity.ok(clientService.readAllClientsWithAccount(pageable));
     }
 
+    @GetMapping("/clients/new")
+    public ResponseEntity readAllClientsWithAccountNew( Pageable pageable){
+        return ResponseEntity.ok(clientService.readAllClientsWithAccountNew(pageable));
+    }
+
     
 }

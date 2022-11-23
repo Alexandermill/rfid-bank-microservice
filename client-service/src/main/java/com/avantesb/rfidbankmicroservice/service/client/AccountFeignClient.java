@@ -4,6 +4,7 @@ import com.avantesb.rfidbankmicroservice.configuration.CustomFeignClientConfigur
 import com.avantesb.rfidbankmicroservice.model.dto.AccountBank;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -14,4 +15,7 @@ public interface AccountFeignClient {
 
     @RequestMapping(path = "/api/v1/accounts/clientid/{clientId}", method = RequestMethod.GET)
     List<AccountBank> getAccountsByClient(@PathVariable("clientId") Long clientId);
+
+    @RequestMapping(path = "/api/v1/accounts/clients", method = RequestMethod.POST, produces = "application/json")
+    List<AccountBank> getAccountsByClientNew(@RequestBody List<Long> clientIds);
 }

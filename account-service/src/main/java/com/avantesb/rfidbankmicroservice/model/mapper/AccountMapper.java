@@ -14,7 +14,7 @@ public class AccountMapper extends BaseMapper<AccountEntity, AccountBank> {
         AccountEntity entity = new AccountEntity();
 
         if(dto != null){
-            BeanUtils.copyProperties(dto, entity, "clientId");
+            BeanUtils.copyProperties(dto, entity);
         }
         return entity;
     }
@@ -24,7 +24,7 @@ public class AccountMapper extends BaseMapper<AccountEntity, AccountBank> {
         AccountBank dto = new AccountBank();
 
         if(entity != null){
-            BeanUtils.copyProperties(entity, dto, "clientId");
+            BeanUtils.copyProperties(entity, dto);
         }
         return dto;
 
