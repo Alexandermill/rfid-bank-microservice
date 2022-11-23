@@ -12,6 +12,6 @@ import java.util.List;
 @FeignClient(name = "transferClient", url = "${account-banking-service}", configuration = CustomFeignClientConfiguration.class)
 public interface AccountFeignClient {
 
-    @RequestMapping(path = "/api/v1/accounts/{clientId}", method = RequestMethod.GET)
+    @RequestMapping(path = "/api/v1/accounts/clientid/{clientId}", method = RequestMethod.GET)
     List<AccountBank> getAccountsByClient(@PathVariable("clientId") Long clientId);
 }

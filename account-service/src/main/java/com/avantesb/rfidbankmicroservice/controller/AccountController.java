@@ -23,9 +23,9 @@ public class AccountController {
         return ResponseEntity.ok(accountService.readAccount(accountNumber));
     }
 
-    @GetMapping("/{clientId}")
-    public ResponseEntity getAccountsById(@PathVariable("clientId") String clientId){
-        log.info("Reading account by client_ID {}", clientId);
+    @GetMapping("/clientid/{clientId}")
+    public ResponseEntity getAccountsById(@PathVariable("clientId") Long clientId){
+        log.info("Reading accounts by client_ID {}", clientId);
         return ResponseEntity.ok(accountService.getAccountsByClientId(clientId));
     }
 

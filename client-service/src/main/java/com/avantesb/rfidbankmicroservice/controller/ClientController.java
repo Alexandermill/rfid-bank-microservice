@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping(value = "/api/v1/user")
+@RequestMapping(value = "/api/v1/clients")
 @RequiredArgsConstructor
 public class ClientController {
 
@@ -26,4 +26,10 @@ public class ClientController {
         return ResponseEntity.ok(clientService.readAllClients(pageable));
     }
 
+    @GetMapping("/id/{clientId}")
+    public ResponseEntity readUserWithAccount(@PathVariable("clientId") Long clientId){
+        return ResponseEntity.ok(clientService.readClientWithAccount(clientId));
+    }
+
+    
 }

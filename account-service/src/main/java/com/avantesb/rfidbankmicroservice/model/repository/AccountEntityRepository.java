@@ -10,5 +10,5 @@ public interface AccountEntityRepository extends JpaRepository<AccountEntity, Lo
 
     Optional<AccountEntity> findByNumber(String number);
 
-    List<AccountEntity> findByClientId();
+    List<AccountEntity> findByClientId(Long clientId);
 }

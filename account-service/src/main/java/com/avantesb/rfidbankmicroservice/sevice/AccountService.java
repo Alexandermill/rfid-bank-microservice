@@ -41,7 +41,7 @@ public class AccountService {
     }
 
 
-    public List<AccountBank> getAccountsByClientId(String clientId) {
-        return accountMapper.convertToDtoList(accountRepository.findByClientId());
+    public List<AccountBank> getAccountsByClientId(Long clientId) {
+        return accountMapper.convertToDtoList(accountRepository.findByClientId(clientId));
     }
 }

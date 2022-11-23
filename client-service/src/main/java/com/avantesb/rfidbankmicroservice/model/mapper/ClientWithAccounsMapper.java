@@ -43,6 +43,7 @@ public class ClientWithAccounsMapper extends BaseMapper<ClientBankEntity, Client
         if(entity != null){
             BeanUtils.copyProperties(entity, dto);
             List<AccountBank> accounts = accountFeignClient.getAccountsByClient(entity.getId());
+            dto.setAccounts(accounts);           
 
         }
         return dto;
