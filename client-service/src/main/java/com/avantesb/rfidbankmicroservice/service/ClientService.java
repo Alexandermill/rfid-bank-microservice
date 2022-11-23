@@ -34,4 +34,8 @@ public class ClientService {
         return clientWithAccounsMapper.convertToDto(clientRepository.getById(clientId));
         }
 
+    public List<ClientWithAccountDTO> readAllClientsWithAccount(Pageable pageable) {
+        return clientWithAccounsMapper.convertToDtoList(clientRepository.findAll(pageable).getContent());
+    }
+
 }

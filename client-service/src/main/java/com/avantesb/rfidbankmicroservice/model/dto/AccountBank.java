@@ -3,6 +3,8 @@ package com.avantesb.rfidbankmicroservice.model.dto;
 import com.avantesb.rfidbankmicroservice.model.constant.AccountStatus;
 import com.avantesb.rfidbankmicroservice.model.constant.AccountType;
 import com.avantesb.rfidbankmicroservice.model.dto.ClientBank;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.Data;
 
 import java.math.BigDecimal;
@@ -15,5 +17,6 @@ public class AccountBank {
     private AccountStatus status;
     private BigDecimal availableBalance;
     private BigDecimal actualBalance;
+    @JsonIgnore
     private ClientBank client;
 }
