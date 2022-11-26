@@ -1,10 +1,7 @@
 package com.avantesb.rfidbankmicroservice.model.entity;
 
 import com.avantesb.rfidbankmicroservice.model.constant.TransactionType;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import jakarta.persistence.*;
 import java.math.BigDecimal;
@@ -15,6 +12,7 @@ import java.math.BigDecimal;
 @Builder
 @Table(name = "bank_transaction")
 @NoArgsConstructor
+@AllArgsConstructor
 public class TransactionEntity {
 
     @Id

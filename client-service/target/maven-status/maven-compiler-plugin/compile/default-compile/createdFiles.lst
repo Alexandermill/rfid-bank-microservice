@@ -19,11 +19,13 @@ com\avantesb\rfidbankmicroservice\configuration\CustomFeignClientConfiguration.c
 com\avantesb\rfidbankmicroservice\model\dto\ClientBank.class
 com\avantesb\rfidbankmicroservice\model\dto\AccountBank.class
 com\avantesb\rfidbankmicroservice\exceptions\ErrorResponse$ErrorResponseBuilder.class
+com\avantesb\rfidbankmicroservice\configuration\LoadBalancerConfiguration.class
 com\avantesb\rfidbankmicroservice\model\request\FundTransferRequest.class
 com\avantesb\rfidbankmicroservice\exceptions\GlobalErrorCode.class
 com\avantesb\rfidbankmicroservice\ClientServiceApp.class
 com\avantesb\rfidbankmicroservice\service\ClientService.class
 com\avantesb\rfidbankmicroservice\model\response\FundTransferResponse$FundTransferResponseBuilder.class
+com\avantesb\rfidbankmicroservice\TestClass.class
 com\avantesb\rfidbankmicroservice\model\entity\AccountReferenceEntity.class
 com\avantesb\rfidbankmicroservice\model\constant\AccountType.class
 com\avantesb\rfidbankmicroservice\model\mapper\ClientMapper.class

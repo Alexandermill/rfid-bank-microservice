@@ -1,12 +1,4 @@
-server:
-  port: 8083
-
-core-banking-service: http://localhost:8080
-account-banking-service: http://localhost:8082
-
 spring:
-  application:
-    name: client-bank-service
   datasource:
 #    url: jdbc:h2:file:/database/core_rfid_bank
     url: jdbc:h2:mem:CLIENT
@@ -19,20 +11,15 @@ spring:
     console.enabled: true
   flyway:
     enabled: true
+
   cloud:
     discovery:
       reactive:
         enabled: false
-#
+
 flyway:
   user: sa
   password: password
   schemas: client_bank-schema
   url: jdbc:h2:mem:CLIENT
 
-eureka:
-  client:
-    serviceUrl:
-      defaultZone: ${EUREKA_URI:http://localhost:8761/eureka}
-  instance:
-    preferIpAddress: true

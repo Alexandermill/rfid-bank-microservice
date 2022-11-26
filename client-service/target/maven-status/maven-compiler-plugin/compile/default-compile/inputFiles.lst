@@ -7,6 +7,7 @@ C:\Users\melnikov\IdeaProjects\rfidbankmicroservice\client-service\src\main\java
 C:\Users\melnikov\IdeaProjects\rfidbankmicroservice\client-service\src\main\java\com\avantesb\rfidbankmicroservice\service\ClientService.java
 C:\Users\melnikov\IdeaProjects\rfidbankmicroservice\client-service\src\main\java\com\avantesb\rfidbankmicroservice\service\client\AccountClient2.java
 C:\Users\melnikov\IdeaProjects\rfidbankmicroservice\client-service\src\main\java\com\avantesb\rfidbankmicroservice\model\mapper\ClientMapper.java
+C:\Users\melnikov\IdeaProjects\rfidbankmicroservice\client-service\src\main\java\com\avantesb\rfidbankmicroservice\configuration\LoadBalancerConfiguration.java
 C:\Users\melnikov\IdeaProjects\rfidbankmicroservice\client-service\src\main\java\com\avantesb\rfidbankmicroservice\model\repository\AccountReferenceEntityRepository.java
 C:\Users\melnikov\IdeaProjects\rfidbankmicroservice\client-service\src\main\java\com\avantesb\rfidbankmicroservice\model\constant\TransactionType.java
 C:\Users\melnikov\IdeaProjects\rfidbankmicroservice\client-service\src\main\java\com\avantesb\rfidbankmicroservice\model\entity\ClientBankEntity.java
@@ -27,3 +28,4 @@ C:\Users\melnikov\IdeaProjects\rfidbankmicroservice\client-service\src\main\java
 C:\Users\melnikov\IdeaProjects\rfidbankmicroservice\client-service\src\main\java\com\avantesb\rfidbankmicroservice\service\client\AccountClient.java
 C:\Users\melnikov\IdeaProjects\rfidbankmicroservice\client-service\src\main\java\com\avantesb\rfidbankmicroservice\model\constant\AccountStatus.java
 C:\Users\melnikov\IdeaProjects\rfidbankmicroservice\client-service\src\main\java\com\avantesb\rfidbankmicroservice\configuration\CustomFeignClientConfiguration.java
+C:\Users\melnikov\IdeaProjects\rfidbankmicroservice\client-service\src\main\java\com\avantesb\rfidbankmicroservice\TestClass.java
