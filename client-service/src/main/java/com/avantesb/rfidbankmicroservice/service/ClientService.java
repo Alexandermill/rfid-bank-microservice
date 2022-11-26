@@ -8,7 +8,7 @@ import com.avantesb.rfidbankmicroservice.model.entity.ClientBankEntity;
 import com.avantesb.rfidbankmicroservice.model.mapper.ClientMapper;
 import com.avantesb.rfidbankmicroservice.model.mapper.ClientWithAccounsMapper;
 import com.avantesb.rfidbankmicroservice.model.repository.ClientBankEntityRepository;
-import com.avantesb.rfidbankmicroservice.service.client.AccountFeignClient;
+import com.avantesb.rfidbankmicroservice.service.client.AccountClient;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -23,7 +23,7 @@ public class ClientService {
     private final ClientMapper clientMapper;
     private final ClientBankEntityRepository clientRepository;
     private final ClientWithAccounsMapper clientWithAccounsMapper;
-    private final AccountFeignClient accountFeignClient;
+    private final AccountClient accountFeignClient;
 
     public List<ClientBank> readAllClients(Pageable pageable){
         return clientMapper.convertToDtoList(clientRepository.findAll(pageable).getContent());

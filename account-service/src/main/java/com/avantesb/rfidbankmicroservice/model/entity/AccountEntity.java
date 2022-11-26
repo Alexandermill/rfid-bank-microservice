@@ -5,7 +5,7 @@ import com.avantesb.rfidbankmicroservice.model.constant.AccountType;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 import java.math.BigDecimal;
 
 @Entity

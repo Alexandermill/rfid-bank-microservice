@@ -1,23 +1,19 @@
 package com.avantesb.rfidbankmicroservice.model.mapper;
 
-import com.avantesb.rfidbankmicroservice.model.dto.AccountBank;
-import com.avantesb.rfidbankmicroservice.model.dto.ClientBank;
 import com.avantesb.rfidbankmicroservice.model.dto.ClientWithAccountDTO;
 import com.avantesb.rfidbankmicroservice.model.entity.AccountReferenceEntity;
 import com.avantesb.rfidbankmicroservice.model.entity.ClientBankEntity;
-import com.avantesb.rfidbankmicroservice.service.client.AccountFeignClient;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
 import java.util.stream.Collectors;
 
 @Component
 @AllArgsConstructor
 public class ClientWithAccounsMapper extends BaseMapper<ClientBankEntity, ClientWithAccountDTO>{
 
-    AccountFeignClient accountFeignClient;
+//    private final AccountFeignClient accountFeignClient;
 
     @Override
     public ClientBankEntity convertToEntity(ClientWithAccountDTO dto, Object... args) {

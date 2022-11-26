@@ -1,10 +1,9 @@
 package com.avantesb.rfidbankmicroservice.model.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.*;
 
 @Entity
 @Getter

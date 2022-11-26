@@ -13,6 +13,7 @@
     <module>transfer-service</module>
     <module>account-service</module>
       <module>client-service</module>
+      <module>config-server</module>
   </modules>
 
   <name>rfidbankmicroservice</name>
@@ -22,9 +23,11 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <maven.compiler.source>17</maven.compiler.source>
     <maven.compiler.target>17</maven.compiler.target>
-    <spring.boot.maven.plugin.version>2.5.7</spring.boot.maven.plugin.version>
-    <spring.boot.dependencies.version>2.5.7</spring.boot.dependencies.version>
-    <spring.cloud-version>2020.0.5</spring.cloud-version>
+    <spring.boot.maven.plugin.version>3.0.0</spring.boot.maven.plugin.version>
+    <spring.boot.dependencies.version>3.0.0</spring.boot.dependencies.version>
+<!--    <spring.cloud-version>2020.0.5</spring.cloud-version>-->
+    <spring.cloud-version>2022.0.0-RC2</spring.cloud-version>
+<!--    <spring.cloud-version>Greenwich.RELEASE</spring.cloud-version>-->
 
   </properties>
 
@@ -69,4 +72,22 @@
       </plugins>
     </pluginManagement>
   </build>
+  <repositories>
+    <repository>
+      <id>netflix-candidates</id>
+      <name>Netflix Candidates</name>
+      <url>https://artifactory-oss.prod.netflix.net/artifactory/maven-oss-candidates</url>
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
+    </repository>
+    <repository>
+      <id>spring-milestones</id>
+      <name>Spring Milestones</name>
+      <url>https://repo.spring.io/milestone</url>
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
+    </repository>
+  </repositories>
 </project>

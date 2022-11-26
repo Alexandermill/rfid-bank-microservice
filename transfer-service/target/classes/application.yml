@@ -17,14 +17,15 @@ spring:
       spring.jpa.database-platform: org.hibernate.dialect.H2Dialect
   h2:
     console.enabled: true
-#  flyway:
-#    enabled: true
-#
-#flyway:
-#  user: sa
-#  password: password
-#  schemas: core_bank-schema
-##  url: jdbc:h2:mem:DATABASE
-##  url: jdbc:h2:file:/data/core_bank
-##  locations:
-##    filesystem: db/migration
+  cloud:
+    discovery:
+      reactive:
+        enabled: false
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: ${EUREKA_URI:http://localhost:8761/eureka}
+  instance:
+#    instanceId: ${spring.application.name}:${vcap.application.instance_id:${spring.application.instance_id:${random.value}}}
+    preferIpAddress: true

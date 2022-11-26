@@ -1,0 +1,27 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: core-bank-service
+  datasource:
+#    url: jdbc:h2:file:/database/core_rfid_bank
+    url: jdbc:h2:mem:DATABASE
+    username: sa
+    password: password
+    driverClassName: org.h2.Driver
+    jpa:
+      spring.jpa.database-platform: org.hibernate.dialect.H2Dialect
+  h2:
+    console.enabled: true
+  flyway:
+    enabled: true
+
+flyway:
+  user: sa
+  password: password
+  schemas: core_bank-schema
+#  url: jdbc:h2:mem:DATABASE
+#  url: jdbc:h2:file:/data/core_bank
+#  locations:
+#    filesystem: db/migration

@@ -4,9 +4,13 @@ import com.avantesb.rfidbankmicroservice.model.dto.AccountBank;
 import com.avantesb.rfidbankmicroservice.sevice.AccountService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.client.discovery.DiscoveryClient;
+import org.springframework.http.HttpRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.net.http.HttpClient;
 import java.util.List;
 
 @Slf4j

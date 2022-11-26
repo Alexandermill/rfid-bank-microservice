@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: eureka-server
+  cloud:
+    loadbalancer:
+      ribbon:
+        enabled: false
+server.port: 8761
+
+eureka:
+  client:
+    register-with-eureka: false
+    fetch-registry: false
+#logging.level.org.springframework.web=DEBUG

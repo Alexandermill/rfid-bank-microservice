@@ -22,6 +22,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(Exception.class)
     protected ResponseEntity handleException(Exception e, Locale locale){
+        e.printStackTrace();
         return ResponseEntity
                 .badRequest()
                 .body("Exception occur inside API " + e);

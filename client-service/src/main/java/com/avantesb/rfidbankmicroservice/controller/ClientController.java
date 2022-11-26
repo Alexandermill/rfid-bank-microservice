@@ -1,5 +1,6 @@
 package com.avantesb.rfidbankmicroservice.controller;
 
+import com.avantesb.rfidbankmicroservice.TestClass;
 import com.avantesb.rfidbankmicroservice.service.ClientService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class ClientController {
 
     private final ClientService clientService;
+    private final TestClass testClass;
 
     @GetMapping("/{identification}")
     public ResponseEntity readUser(@PathVariable("identification") String identification){
@@ -39,6 +41,12 @@ public class ClientController {
     @GetMapping("/clients/new")
     public ResponseEntity readAllClientsWithAccountNew( Pageable pageable){
         return ResponseEntity.ok(clientService.readAllClientsWithAccountNew(pageable));
+    }
+
+    @GetMapping("/test")
+    public String test(){
+        testClass.dClient();
+        return "test";
     }
 
     
