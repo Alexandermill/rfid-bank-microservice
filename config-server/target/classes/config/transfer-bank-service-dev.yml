@@ -1,0 +1,17 @@
+spring:
+  application:
+    name: transfer-bank-service
+  datasource:
+#    url: jdbc:h2:file:/database/core_rfid_bank
+    url: jdbc:h2:mem:TRANSFER
+    username: sa
+    password: password
+    driverClassName: org.h2.Driver
+    jpa:
+      spring.jpa.database-platform: org.hibernate.dialect.H2Dialect
+  h2:
+    console.enabled: true
+  cloud:
+    discovery:
+      reactive:
+        enabled: false
