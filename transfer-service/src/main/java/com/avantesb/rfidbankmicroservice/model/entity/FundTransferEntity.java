@@ -12,6 +12,7 @@ import java.math.BigDecimal;
 @Setter
 @Entity
 @Table(name = "fund_transfer")
+@ToString
 public class FundTransferEntity {
 
     @Id

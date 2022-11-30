@@ -35,11 +35,18 @@ public class FundTransferService {
         FundTransferEntity optFundTransfer = fundTransferRepository.save(entity);
 
         FundTransferResponse fundTransferResponse = coreFeignClient.fundTransfer(request);
-        optFundTransfer.setTransactionReference(fundTransferResponse.getTransactionId());
-        optFundTransfer.setStatus(TransactionStatus.SUCCESS);
+
+        if(fundTransferResponse.getTransactionId() == null){
+            optFundTransfer.setStatus(TransactionStatus.FAILED);
+        } else {
+            optFundTransfer.setTransactionReference(fundTransferResponse.getTransactionId());
+            optFundTransfer.setStatus(TransactionStatus.SUCCESS);
+            fundTransferResponse.setMessage("Fund Transfer Successfully Completed");
+        }
+
         fundTransferRepository.save(optFundTransfer);
 
-        fundTransferResponse.setMessage("Fund Transfer Successfully Completed");
+
         return fundTransferResponse;
 
     }

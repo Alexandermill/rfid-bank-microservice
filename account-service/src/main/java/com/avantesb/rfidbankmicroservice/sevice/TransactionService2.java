@@ -16,18 +16,20 @@ import com.avantesb.rfidbankmicroservice.model.response.FundTransferResponse;
 import com.avantesb.rfidbankmicroservice.model.response.UtilityPaymentResponse;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.util.Optional;
 import java.util.UUID;
 
-//@Service
-//@AllArgsConstructor
-public class TransactionService {
+@Service
+@AllArgsConstructor
+public class TransactionService2 {
 
     private AccountServiceClass accountService;
     private AccountEntityRepository accountRepository;
     private TransactionEntityRepository transactionRepository;
+    private InternalFundTransaction internalTransfer;
 
 
 
@@ -44,9 +46,12 @@ public class TransactionService {
         AccountBank fromAccount = accountService.readAccount(transferRequest.getFromAccount());
         AccountBank toAccount = accountService.readAccount(transferRequest.getToAccount());
 
-        validateBalance(fromAccount, transferRequest.getAmmount());
+        if(!validateBalance(fromAccount, transferRequest.getAmmount())){
+            return FundTransferResponse.builder().message("Insufficient funds in the account " + fromAccount.getNumber()).build();
+        }
 
-        String transactionId = internalFundTransfer(fromAccount, toAccount, transferRequest.getAmmount());
+        String transactionId = internalTransfer.internalFundTransfer(fromAccount, toAccount, transferRequest.getAmmount());
+
         return FundTransferResponse.builder().message("Transaction successfully completed").transactionId(transactionId)
                 .build();
 
@@ -83,10 +88,12 @@ public class TransactionService {
 
     }
 
-    private void validateBalance(AccountBank accountBank, BigDecimal ammount){
+    private boolean validateBalance(AccountBank accountBank, BigDecimal ammount){
         if(accountBank.getAvailableBalance().compareTo(BigDecimal.ZERO) < 0 || accountBank.getAvailableBalance().compareTo(ammount) < 0){
-            throw new InsufficientFundsException("Insufficient funds in the account " + accountBank.getNumber(), GlobalErrorCode.INSUFFICIENT_FUNDS);
+//            throw new InsufficientFundsException("Insufficient funds in the account " + accountBank.getNumber(), GlobalErrorCode.INSUFFICIENT_FUNDS);
+            return false;
         }
+        return true;
     }
 
     private boolean accountExist(String accountNumber){
@@ -94,38 +101,6 @@ public class TransactionService {
         return entity.isPresent();
     }
 
-    public String internalFundTransfer(AccountBank fromAccount, AccountBank toAccount, BigDecimal ammount){
-        String transactionId = UUID.randomUUID().toString();
 
-        AccountEntity fromAccountEntity = accountRepository.findByNumber(fromAccount.getNumber())
-                .orElseThrow(EntityNotFoundException::new);
-        AccountEntity toAccountEntity = accountRepository.findByNumber(toAccount.getNumber())
-                .orElseThrow(EntityNotFoundException::new);
-
-        fromAccountEntity.setActualBalance(fromAccountEntity.getActualBalance().subtract(ammount));
-        fromAccountEntity.setAvailableBalance(fromAccountEntity.getAvailableBalance().subtract(ammount));
-        accountRepository.save(fromAccountEntity);
-
-        transactionRepository.save(TransactionEntity.builder().transactionType(TransactionType.FUND_TRANSFER)
-                .referenceNumber(toAccountEntity.getNumber())
-                .account(fromAccountEntity)
-                .transactionId(transactionId)
-                .ammount(ammount.negate())
-                .build());
-
-        toAccountEntity.setAvailableBalance(toAccountEntity.getAvailableBalance().add(ammount));
-        toAccountEntity.setActualBalance(toAccountEntity.getActualBalance().add(ammount));
-        accountRepository.save(toAccountEntity);
-
-        transactionRepository.save(TransactionEntity.builder().transactionType(TransactionType.FUND_TRANSFER)
-                .referenceNumber(toAccountEntity.getNumber())
-                .account(fromAccountEntity)
-                .transactionId(transactionId)
-                .ammount(ammount)
-                .build());
-
-        return transactionId;
-
-    }
 
 }

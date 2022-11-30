@@ -1,6 +1,5 @@
 package com.avantesb.rfidbankmicroservice.controller;
 
-import com.avantesb.rfidbankmicroservice.TestClass;
 import com.avantesb.rfidbankmicroservice.model.dto.request.FundTransferRequest;
 import com.avantesb.rfidbankmicroservice.service.FundTransferService;
 import lombok.RequiredArgsConstructor;
@@ -16,12 +15,6 @@ import org.springframework.web.bind.annotation.*;
 public class FundTransferController {
 
     private final FundTransferService fundTransferService;
-    private final TestClass testClass;
-
-    @GetMapping("/test")
-    public void test(){
-        testClass.dClient();
-    }
 
     @PostMapping
     public ResponseEntity fundTransfer(@RequestBody FundTransferRequest request){
