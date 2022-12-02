@@ -1,11 +1,12 @@
-package com.avantesb.rfidbankmicroservice.model.dto.request;
+package com.avantesb.rfidbankmicroservice.model.request;
 
 import lombok.Data;
 
 import java.math.BigDecimal;
 
 @Data
-public class FundTransferRequest {
+public class TransferRequest {
+    private Long transferId;
     private String fromAccount;
     private String toAccount;
     private BigDecimal ammount;

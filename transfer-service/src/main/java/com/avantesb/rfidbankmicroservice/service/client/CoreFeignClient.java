@@ -1,8 +1,8 @@
 package com.avantesb.rfidbankmicroservice.service.client;
 
 import com.avantesb.rfidbankmicroservice.configuration.LoadBalancerConfiguration;
-import com.avantesb.rfidbankmicroservice.model.dto.request.FundTransferRequest;
-import com.avantesb.rfidbankmicroservice.model.dto.response.FundTransferResponse;
+import com.avantesb.rfidbankmicroservice.model.dto.request.TransferRequest;
+import com.avantesb.rfidbankmicroservice.model.dto.response.TransferResponse;
 import org.springframework.cloud.loadbalancer.annotation.LoadBalancerClient;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -17,5 +17,5 @@ public interface CoreFeignClient {
 //    AccountResponse readAccount(@PathVariable("account_number") String accountNumber);
 
     @RequestMapping(value = "/api/v1/transaction/fund-transfer", method = RequestMethod.POST)
-    FundTransferResponse fundTransfer(@RequestBody FundTransferRequest request);
+    TransferResponse fundTransfer(@RequestBody TransferRequest request);
 }

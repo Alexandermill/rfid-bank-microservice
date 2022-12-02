@@ -25,7 +25,7 @@ C:\Users\melnikov\IdeaProjects\rfidbankmicroservice\client-service\src\main\java
 C:\Users\melnikov\IdeaProjects\rfidbankmicroservice\client-service\src\main\java\com\avantesb\rfidbankmicroservice\controller\ClientController.java
 C:\Users\melnikov\IdeaProjects\rfidbankmicroservice\client-service\src\main\java\com\avantesb\rfidbankmicroservice\model\dto\ClientBank.java
 C:\Users\melnikov\IdeaProjects\rfidbankmicroservice\client-service\src\main\java\com\avantesb\rfidbankmicroservice\model\repository\ClientBankEntityRepository.java
+C:\Users\melnikov\IdeaProjects\rfidbankmicroservice\client-service\src\main\java\com\avantesb\rfidbankmicroservice\service\message\MessageService.java
 C:\Users\melnikov\IdeaProjects\rfidbankmicroservice\client-service\src\main\java\com\avantesb\rfidbankmicroservice\service\client\AccountClient.java
 C:\Users\melnikov\IdeaProjects\rfidbankmicroservice\client-service\src\main\java\com\avantesb\rfidbankmicroservice\model\constant\AccountStatus.java
 C:\Users\melnikov\IdeaProjects\rfidbankmicroservice\client-service\src\main\java\com\avantesb\rfidbankmicroservice\configuration\CustomFeignClientConfiguration.java
-C:\Users\melnikov\IdeaProjects\rfidbankmicroservice\client-service\src\main\java\com\avantesb\rfidbankmicroservice\TestClass.java

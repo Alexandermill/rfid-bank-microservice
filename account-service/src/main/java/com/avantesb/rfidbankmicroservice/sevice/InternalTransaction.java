@@ -15,7 +15,7 @@ import java.util.UUID;
 
 @Service
 @AllArgsConstructor
-public class InternalFundTransaction {
+public class InternalTransaction {
 
     private AccountEntityRepository accountRepository;
     private TransactionEntityRepository transactionRepository;

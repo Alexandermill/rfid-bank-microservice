@@ -1,8 +1,8 @@
 package com.avantesb.rfidbankmicroservice.controller;
 
-import com.avantesb.rfidbankmicroservice.model.request.FundTransferRequest;
+import com.avantesb.rfidbankmicroservice.model.request.TransferRequest;
 import com.avantesb.rfidbankmicroservice.model.request.UtilityPaymentRequest;
-import com.avantesb.rfidbankmicroservice.sevice.TransactionService2;
+import com.avantesb.rfidbankmicroservice.sevice.TransactionService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -17,10 +17,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/v1/transaction")
 public class TransactionController {
 
-    private final TransactionService2 transactionService;
+    private final TransactionService transactionService;
 
     @PostMapping("/fund-transfer")
-    public ResponseEntity fundTransfer(@RequestBody FundTransferRequest request){
+    public ResponseEntity fundTransfer(@RequestBody TransferRequest request){
 
         log.info("Fund transfer initiated in core bank from {}", request.toString());
 

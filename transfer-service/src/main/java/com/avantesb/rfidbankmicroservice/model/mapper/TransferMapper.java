@@ -1,18 +1,18 @@
 package com.avantesb.rfidbankmicroservice.model.mapper;
 
 import com.avantesb.rfidbankmicroservice.model.dto.FundTransfer;
-import com.avantesb.rfidbankmicroservice.model.entity.FundTransferEntity;
+import com.avantesb.rfidbankmicroservice.model.entity.TransferEntity;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Component;
 
 @Component
-public class FundTransferMapper extends BaseMapper<FundTransferEntity, FundTransfer>{
+public class TransferMapper extends BaseMapper<TransferEntity, FundTransfer>{
 
 
     @Override
-    public FundTransferEntity convertToEntity(FundTransfer dto, Object... args) {
+    public TransferEntity convertToEntity(FundTransfer dto, Object... args) {
 
-        FundTransferEntity entity = new FundTransferEntity();
+        TransferEntity entity = new TransferEntity();
         if(dto != null){
             BeanUtils.copyProperties(dto, entity);
         }
@@ -20,7 +20,7 @@ public class FundTransferMapper extends BaseMapper<FundTransferEntity, FundTrans
     }
 
     @Override
-    public FundTransfer convertToDto(FundTransferEntity entity, Object... args) {
+    public FundTransfer convertToDto(TransferEntity entity, Object... args) {
 
         FundTransfer dto = new FundTransfer();
         if(entity != null){

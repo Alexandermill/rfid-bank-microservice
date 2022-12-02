@@ -2,7 +2,6 @@ package com.avantesb.rfidbankmicroservice.controller;
 
 import com.avantesb.rfidbankmicroservice.model.dto.AccountBank;
 import com.avantesb.rfidbankmicroservice.sevice.AccountService;
-import com.avantesb.rfidbankmicroservice.sevice.AccountServiceClass;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;

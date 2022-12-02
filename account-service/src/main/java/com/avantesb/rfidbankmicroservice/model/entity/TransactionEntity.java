@@ -27,7 +27,7 @@ public class TransactionEntity {
     private String referenceNumber;
     private String transactionId;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "account_id", referencedColumnName = "id")
     private AccountEntity account;
 

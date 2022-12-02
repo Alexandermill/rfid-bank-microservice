@@ -22,7 +22,6 @@ public class AccountServiceImpl implements AccountService {
 
     private AccountMapper accountMapper;
     private UtilAccountMapper utilAccountMapper;
-
     private final AccountEntityRepository accountRepository;
     private final UtilityAccountEntityRepository utilAccountRepository;
 

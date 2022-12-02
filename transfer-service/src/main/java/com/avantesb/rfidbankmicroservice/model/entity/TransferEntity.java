@@ -8,12 +8,12 @@ import lombok.ToString;
 import jakarta.persistence.*;
 import java.math.BigDecimal;
 
+@ToString // TODO: 02.12.2022
 @Getter
 @Setter
 @Entity
 @Table(name = "fund_transfer")
-@ToString
-public class FundTransferEntity {
+public class TransferEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -25,7 +25,7 @@ com\avantesb\rfidbankmicroservice\exceptions\GlobalErrorCode.class
 com\avantesb\rfidbankmicroservice\ClientServiceApp.class
 com\avantesb\rfidbankmicroservice\service\ClientService.class
 com\avantesb\rfidbankmicroservice\model\response\FundTransferResponse$FundTransferResponseBuilder.class
-com\avantesb\rfidbankmicroservice\TestClass.class
+com\avantesb\rfidbankmicroservice\service\message\MessageService.class
 com\avantesb\rfidbankmicroservice\model\entity\AccountReferenceEntity.class
 com\avantesb\rfidbankmicroservice\model\constant\AccountType.class
 com\avantesb\rfidbankmicroservice\model\mapper\ClientMapper.class

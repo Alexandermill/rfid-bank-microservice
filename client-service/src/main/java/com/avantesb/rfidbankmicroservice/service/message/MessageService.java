@@ -12,7 +12,6 @@ import java.util.List;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
 import java.util.function.Consumer;
-import java.util.stream.Collectors;
 
 @Component
 public class MessageService {
@@ -25,16 +24,13 @@ public class MessageService {
 
     @Bean
     public Consumer<List<AccountBank>> getAccount(){
-        return accounts -> {
-            accounts.forEach(a -> {
-                try {
-                    queue.put(a);
-                } catch (InterruptedException e) {
-                    throw new RuntimeException(e);
-                }
-            });
-
-        };
+        return accounts -> accounts.forEach(a -> {
+            try {
+                queue.put(a);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+        });
     }
 
     public List<AccountBank> getAccountsQueue(){
