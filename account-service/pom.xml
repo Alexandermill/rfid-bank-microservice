@@ -49,6 +49,11 @@
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-config-client</artifactId>
         </dependency>
+        <dependency>
+            <groupId>io.nats</groupId>
+            <artifactId>nats-spring-cloud-stream-binder</artifactId>
+            <version>0.5.6</version>
+        </dependency>
     </dependencies>
 
 </project>

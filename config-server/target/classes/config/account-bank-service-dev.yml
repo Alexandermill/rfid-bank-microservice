@@ -13,6 +13,28 @@ spring:
     console.enabled: true
   flyway:
     enabled: true
+    cloud:
+      stream:
+        bindings:
+          getAccounts-in-0:
+            destination: account
+            binder: nats1
+          getAccounts-out-0:
+            destination: client
+            binder: nats1
+        binders:
+          nats1:
+            type: nats
+            environment:
+              nats:
+                spring:
+                  cloud:
+                    stream:
+                      binder:
+                        server: nats://localhost:4222
+#nats:
+#  spring:
+#    server: nats://localhost:4222
 
 flyway:
   user: sa

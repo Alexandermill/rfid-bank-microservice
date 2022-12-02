@@ -2,13 +2,11 @@ package com.avantesb.rfidbankmicroservice.service;
 
 import com.avantesb.rfidbankmicroservice.exceptions.EntityNotFoundException;
 import com.avantesb.rfidbankmicroservice.model.dto.AccountBank;
-import com.avantesb.rfidbankmicroservice.model.dto.ClientBank;
 import com.avantesb.rfidbankmicroservice.model.dto.ClientWithAccountDTO;
 import com.avantesb.rfidbankmicroservice.model.entity.ClientBankEntity;
-import com.avantesb.rfidbankmicroservice.model.mapper.ClientMapper;
 import com.avantesb.rfidbankmicroservice.model.mapper.ClientWithAccounsMapper;
 import com.avantesb.rfidbankmicroservice.model.repository.ClientBankEntityRepository;
-import com.avantesb.rfidbankmicroservice.service.client.AccountClient;
+import com.avantesb.rfidbankmicroservice.service.message.MessageService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -20,29 +18,26 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class ClientService {
 
-    private final ClientMapper clientMapper;
     private final ClientBankEntityRepository clientRepository;
     private final ClientWithAccounsMapper clientWithAccounsMapper;
-    private final AccountClient accountFeignClient;
+    private final MessageService messageService;
 
-    public List<ClientBank> readAllClients(Pageable pageable){
-        return clientMapper.convertToDtoList(clientRepository.findAll(pageable).getContent());
-    }
 
-    public ClientBank readClient(String number){
+
+    public ClientWithAccountDTO readClient(String number){
         ClientBankEntity clientBankEntity = clientRepository.findByIdentificationNumber(number).orElseThrow(EntityNotFoundException::new);
-        return clientMapper.convertToDto(clientBankEntity);
+
+        messageService.sendClientIdsToAccountService(List.of(clientBankEntity.getId()));
+
+        List<AccountBank> accounts = messageService.getAccountsQueue();
+
+        ClientWithAccountDTO clientDto = clientWithAccounsMapper.convertToDto(clientBankEntity);
+        clientDto.setAccounts(accounts);
+        return clientDto;
     }
 
-    public ClientWithAccountDTO readClientWithAccount(Long clientId) {
-        return clientWithAccounsMapper.convertToDto(clientRepository.getById(clientId));
-        }
 
-    public List<ClientWithAccountDTO> readAllClientsWithAccount(Pageable pageable) {
-        return clientWithAccounsMapper.convertToDtoList(clientRepository.findAll(pageable).getContent());
-    }
-
-    public List<ClientWithAccountDTO> readAllClientsWithAccountNew(Pageable pageable) {
+    public List<ClientWithAccountDTO> readAllClientsWithAccounts(Pageable pageable) {
         List<ClientBankEntity> entities = clientRepository.findAll(pageable).getContent();
         List<ClientWithAccountDTO> dtoList = clientWithAccounsMapper.convertToDtoList(entities);
 
@@ -51,7 +46,10 @@ public class ClientService {
                 .map(ClientBankEntity::getId)
                 .collect(Collectors.toList());
 
-        List<AccountBank> accounts = accountFeignClient.getAccountsByClientNew(ids);
+        messageService.sendClientIdsToAccountService(ids);
+
+        List<AccountBank> accounts = messageService.getAccountsQueue();
+        System.out.println("in service accounts: " + accounts);
 
         for(ClientWithAccountDTO client : dtoList){
             client.setAccounts(
