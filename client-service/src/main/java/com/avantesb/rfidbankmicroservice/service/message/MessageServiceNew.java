@@ -13,40 +13,38 @@ import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
 import java.util.function.Consumer;
 
-//@Component
-public class MessageService {
+@Component
+public class MessageServiceNew {
 
     @Autowired
     StreamBridge streamBridge;
 
-    BlockingQueue<AccountBank> queue = new ArrayBlockingQueue(1000);
+    BlockingQueue<List<AccountBank>> queue = new ArrayBlockingQueue(1000);
 
 
-//    @Bean
-//    public Consumer<List<AccountBank>> getAccount(){
-//        return accounts -> accounts.forEach(a -> {
-//            try {
-//                queue.put(a);
-//            } catch (InterruptedException e) {
-//                throw new RuntimeException(e);
-//            }
-//        });
-//    }
+    @Bean
+    public Consumer<List<AccountBank>> getAccount(){
+        return accounts -> {
+            try {
+                queue.put(accounts);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+
+            System.out.println("queue: size:"+ queue.size() +" "+ queue);
+        };
+    }
 
     public List<AccountBank> getAccountsQueue(){
 
         List<AccountBank> accountBanks = new ArrayList<>();
 
-        for (int i = 0; i < queue.remainingCapacity(); i++) {
             try {
-                accountBanks.add(queue.take());
+                accountBanks.addAll(queue.take());
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
-            if (queue.isEmpty()){
-                break;
-            }
-        }
+
         return accountBanks;
     }
 

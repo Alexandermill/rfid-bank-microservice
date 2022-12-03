@@ -1,11 +1,11 @@
 INSERT INTO bank_client (id, email, first_name, identification_number, last_name)
-VALUES ('1', 'sam@gmail.com', 'Sam', '808829932V', 'Silva');
+VALUES ('1', 'sap@gmail.com', 'Алексей', '808829932V', 'Сапожников');
 INSERT INTO bank_client (id, email, first_name, identification_number, last_name)
-VALUES ('2', 'guru@gmail.com', 'Guru', '901830556V', 'Darmaraj');
+VALUES ('2', 'umel@gmail.com', 'Юлия', '901830556V', 'Мелконян');
 INSERT INTO bank_client (id, email, first_name, identification_number, last_name)
-VALUES ('3', 'ragu@gmail.com', 'Ragu', '348829932V', 'Sivaraj');
+VALUES ('3', 'silentbob@gmail.com', 'Bob', '348829932V', 'Silent');
 INSERT INTO bank_client (id, email, first_name, identification_number, last_name)
-VALUES ('4', 'randor@gmail.com', 'Randor', '842829932V', 'Manoon');
+VALUES ('4', 'pamuk@gmail.com', 'Омар', '842829932V', 'Памук');
 
 
 INSERT INTO account_ref (number, client_id)

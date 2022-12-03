@@ -2,11 +2,14 @@ package com.avantesb.rfidbankmicroservice.service;
 
 import com.avantesb.rfidbankmicroservice.exceptions.EntityNotFoundException;
 import com.avantesb.rfidbankmicroservice.model.dto.AccountBank;
+import com.avantesb.rfidbankmicroservice.model.dto.ClientBank;
 import com.avantesb.rfidbankmicroservice.model.dto.ClientWithAccountDTO;
 import com.avantesb.rfidbankmicroservice.model.entity.ClientBankEntity;
+import com.avantesb.rfidbankmicroservice.model.mapper.ClientMapper;
 import com.avantesb.rfidbankmicroservice.model.mapper.ClientWithAccounsMapper;
 import com.avantesb.rfidbankmicroservice.model.repository.ClientBankEntityRepository;
 import com.avantesb.rfidbankmicroservice.service.message.MessageService;
+import com.avantesb.rfidbankmicroservice.service.message.MessageServiceNew;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -20,7 +23,8 @@ public class ClientService {
 
     private final ClientBankEntityRepository clientRepository;
     private final ClientWithAccounsMapper clientWithAccounsMapper;
-    private final MessageService messageService;
+    private final ClientMapper clientMapper;
+    private final MessageServiceNew messageService;
 
 
 
@@ -61,5 +65,10 @@ public class ClientService {
 
 
         return dtoList;
+    }
+
+    public List<ClientBank> readAllclients(Pageable pageable) {
+        List<ClientBankEntity> entities = clientRepository.findAll(pageable).getContent();
+        return clientMapper.convertToDtoList(entities);
     }
 }
