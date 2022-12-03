@@ -49,6 +49,6 @@ public class MessageServiceNew {
     }
 
     public void sendClientIdsToAccountService(List<Long> ids){
-        streamBridge.send("getAccounts-out-0", MessageBuilder.withPayload(ids).build());
+        streamBridge.send("sendClientID-out-0", MessageBuilder.withPayload(ids).build());
     }
 }

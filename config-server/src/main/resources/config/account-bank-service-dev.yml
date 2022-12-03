@@ -13,7 +13,56 @@ spring:
     console.enabled: true
   flyway:
     enabled: true
-
+  cloud:
+    stream:
+      function:
+        definition: getAccounts; commitTransaction
+      bindings:
+        getAccounts-in-0:
+          destination: client
+          group: accountsID
+        getAccounts-out-0:
+          destination: client
+        commitTransaction-in-0:
+          destination: transfer
+          group: transactionInit
+        commitTransaction-out-0:
+          destination: transfer
+      rabbit:
+        bindings:
+          getAccounts-in-0:
+            consumer:
+              bindQueue: false
+              declareExchange: false
+              queueNameGroupOnly: true
+              exchangeType: direct
+              bindingRoutingKey: accountsID
+          getAccounts-out-0:
+            producer:
+              bindQueue: false
+              declareExchange: false
+              queueNameGroupOnly: true
+              exchangeType: direct
+              routingKeyExpression: '''accounts'''
+          commitTransaction-in-0:
+            consumer:
+              bindQueue: false
+              declareExchange: false
+              queueNameGroupOnly: true
+              exchangeType: direct
+              bindingRoutingKey: transactionInit
+          commitTransaction-out-0:
+            producer:
+              bindQueue: false
+              declareExchange: false
+              queueNameGroupOnly: true
+              exchangeType: direct
+              routingKeyExpression: '''transactionStatus'''
+  rabbitmq:
+    host: 127.0.0.1
+    port: 5672
+    username: guest
+    password: guest
 
 flyway:
   user: sa

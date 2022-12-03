@@ -35,14 +35,14 @@ public class TransactionService {
     public TransferResponse fundTransfer(TransferRequest transferRequest){
 
         if(!accountExist(transferRequest.getFromAccount())){
-            log.info("Account from {} not found", transferRequest.getFromAccount());
+            log.info("Transfer ID: {} failed. Account from {} not found", transferRequest.getTransferId(), transferRequest.getFromAccount());
             return TransferResponse.builder().message("Transaction failed. Account from not found")
                     .transferId(transferRequest.getTransferId())
                     .build();
         }
 
         if(!accountExist(transferRequest.getToAccount())){
-            log.info("Account to {} not found", transferRequest.getToAccount());
+            log.info("Transfer ID: {} failed. Account to {} not found", transferRequest.getTransferId(), transferRequest.getToAccount());
             return TransferResponse.builder().message("Transaction failed. Account to not found")
                     .transferId(transferRequest.getTransferId())
                     .build();
@@ -58,6 +58,8 @@ public class TransactionService {
         }
 
         String transactionId = internalTransfer.internalFundTransfer(fromAccount, toAccount, transferRequest.getAmmount());
+
+        log.info("Transaction ID: {} succes", transactionId);
 
         return TransferResponse.builder().message("Transaction successfully completed")
                 .transferId(transferRequest.getTransferId())

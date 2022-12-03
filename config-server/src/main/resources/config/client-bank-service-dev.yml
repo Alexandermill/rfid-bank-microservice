@@ -11,6 +11,36 @@ spring:
     console.enabled: true
   flyway:
     enabled: true
+  cloud:
+    stream:
+      definition: getAccount;sendClientID
+      bindings:
+        getAccount-in-0:
+          destination: client
+          group: accounts
+        sendClientID-out-0:
+          destination: client
+      rabbit:
+        bindings:
+          getAccount-in-0:
+            consumer:
+              bindQueue: false
+              declareExchange: false
+              queueNameGroupOnly: true
+              exchangeType: direct
+              bindingRoutingKey: accounts
+          sendClientID-out-0:
+            producer:
+              bindQueue: false
+              declareExchange: false
+              queueNameGroupOnly: true
+              exchangeType: direct
+              routingKeyExpression: '''accountsID'''
+  rabbitmq:
+    host: 127.0.0.1
+    port: 5672
+    username: guest
+    password: guest
 
 
 flyway:
@@ -18,4 +48,3 @@ flyway:
   password: password
   schemas: client_bank-schema
   url: jdbc:h2:mem:CLIENT
-

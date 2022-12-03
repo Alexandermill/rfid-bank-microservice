@@ -13,5 +13,34 @@ spring:
     discovery:
       reactive:
         enabled: false
+    stream:
+      definition: sendTransfer;transactionStatus
+      bindings:
+        transactionStatus-in-0:
+          destination: transfer
+          group: transactionStatus
+        sendTransfer-out-0:
+          destination: transfer
+      rabbit:
+        bindings:
+          transactionStatus-in-0:
+            consumer:
+              bindQueue: false
+              declareExchange: false
+              queueNameGroupOnly: true
+              exchangeType: direct
+              bindingRoutingKey: transactionStatus
+          sendTransfer-out-0:
+            producer:
+              bindQueue: false
+              declareExchange: false
+              queueNameGroupOnly: true
+              exchangeType: direct
+              routingKeyExpression: '''transactionInit'''
+  rabbitmq:
+    host: 127.0.0.1
+    port: 5672
+    username: guest
+    password: guest
 
 myhost.name: localhost
