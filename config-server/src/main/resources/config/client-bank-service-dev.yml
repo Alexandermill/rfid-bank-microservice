@@ -12,21 +12,6 @@ spring:
   flyway:
     enabled: true
 
-  cloud:
-    stream:
-      function:
-        definition: getAccount;getAccounts
-      bindings:
-        getAccount-in-0:
-          destination: client
-          binder: nats
-          group: a
-        getAccounts-out-0:
-          destination: account
-          binder: nats
-nats:
-  spring:
-    server: nats://localhost:4222
 
 flyway:
   user: sa

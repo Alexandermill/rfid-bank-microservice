@@ -15,7 +15,6 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="config-server" target="17" />
       <module name="core-service" target="17" />
     </bytecodeTargetLevel>
   </component>

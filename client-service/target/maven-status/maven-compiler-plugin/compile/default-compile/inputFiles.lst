@@ -21,6 +21,7 @@ C:\Users\melnikov\IdeaProjects\rfidbankmicroservice\client-service\src\main\java
 C:\Users\melnikov\IdeaProjects\rfidbankmicroservice\client-service\src\main\java\com\avantesb\rfidbankmicroservice\ClientServiceApp.java
 C:\Users\melnikov\IdeaProjects\rfidbankmicroservice\client-service\src\main\java\com\avantesb\rfidbankmicroservice\model\dto\AccountBank.java
 C:\Users\melnikov\IdeaProjects\rfidbankmicroservice\client-service\src\main\java\com\avantesb\rfidbankmicroservice\exceptions\InsufficientFundsException.java
+C:\Users\melnikov\IdeaProjects\rfidbankmicroservice\client-service\src\main\java\com\avantesb\rfidbankmicroservice\service\message\MessageServiceNew.java
 C:\Users\melnikov\IdeaProjects\rfidbankmicroservice\client-service\src\main\java\com\avantesb\rfidbankmicroservice\model\entity\AccountReferenceEntity.java
 C:\Users\melnikov\IdeaProjects\rfidbankmicroservice\client-service\src\main\java\com\avantesb\rfidbankmicroservice\controller\ClientController.java
 C:\Users\melnikov\IdeaProjects\rfidbankmicroservice\client-service\src\main\java\com\avantesb\rfidbankmicroservice\model\dto\ClientBank.java

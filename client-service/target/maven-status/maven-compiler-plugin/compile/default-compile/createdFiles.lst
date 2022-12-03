@@ -4,6 +4,7 @@ com\avantesb\rfidbankmicroservice\service\client\AccountClient.class
 com\avantesb\rfidbankmicroservice\model\mapper\BaseMapper.class
 com\avantesb\rfidbankmicroservice\model\request\UtilityPaymentRequest.class
 com\avantesb\rfidbankmicroservice\model\response\UtilityPaymentResponse.class
+com\avantesb\rfidbankmicroservice\service\message\MessageServiceNew.class
 com\avantesb\rfidbankmicroservice\model\constant\TransactionType.class
 com\avantesb\rfidbankmicroservice\model\response\UtilityPaymentResponse$UtilityPaymentResponseBuilder.class
 com\avantesb\rfidbankmicroservice\exceptions\InsufficientFundsException.class
