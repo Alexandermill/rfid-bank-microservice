@@ -19,7 +19,7 @@ public class MessageService {
     @Autowired
     StreamBridge streamBridge;
 
-    BlockingQueue<AccountBank> queue = new ArrayBlockingQueue(1000);
+    private BlockingQueue<AccountBank> queue = new ArrayBlockingQueue(1000);
 
 
 //    @Bean

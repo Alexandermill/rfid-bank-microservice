@@ -58,7 +58,7 @@ public class FundTransferService {
                     .setHeader("Idempotency-Key", idempotencyKey(request))
                     .build());
 
-        log.info("Sending fund transfer request {}, status: {}" + request.toString(), send);
+        log.info("Sending fund transfer request {}, status: {}" + request, send);
 
         System.out.println("Key:  " + idempotencyKey(request));
 
@@ -84,7 +84,7 @@ public class FundTransferService {
 
         String keyString = ""+hash.hashCode()+day+hour;
         UUID key = UUID.nameUUIDFromBytes(keyString.getBytes());
-        System.out.println("request ID: "+request.getTransferId()+ " key: "+ key.toString());
+        System.out.println("request ID: "+request.getTransferId()+ " key: "+ key);
         return key.toString();
     }
 

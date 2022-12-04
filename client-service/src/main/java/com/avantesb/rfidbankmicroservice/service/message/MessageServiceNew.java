@@ -39,10 +39,10 @@ public class MessageServiceNew {
 
     public List<AccountBank> getAccountsQueue(){
 
-        List<AccountBank> accountBanks = new ArrayList<>();
+        List<AccountBank> accountBanks;
 
             try {
-                accountBanks.addAll(queue.take());
+                accountBanks = new ArrayList<>(queue.take());
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
