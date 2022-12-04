@@ -1,7 +1,10 @@
-/account-service/target/
-/client-service/target/
-/config-server/target/
-/transfer-service/target/
+account-service/target/
+client-service/target/
+config-server/target/
+transfer-service/target/
+eureka/target
+*.jar
+*.class
 
 HELP.md
 target/
