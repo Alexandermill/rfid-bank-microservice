@@ -11,6 +11,7 @@ CREATE TABLE bank_account (
 
 CREATE TABLE bank_transaction (
   id BIGINT AUTO_INCREMENT NOT NULL,
+   transfer_id BIGINT NOT NULL,
    ammount DECIMAL,
    transaction_type VARCHAR(255),
    reference_number VARCHAR(255),

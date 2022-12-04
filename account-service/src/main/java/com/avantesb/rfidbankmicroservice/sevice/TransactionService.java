@@ -17,6 +17,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -25,7 +26,7 @@ import java.util.UUID;
 @AllArgsConstructor
 public class TransactionService {
 
-    private AccountServiceImpl accountService;
+    private AccountService accountService;
     private AccountEntityRepository accountRepository;
     private TransactionEntityRepository transactionRepository;
     private InternalTransaction internalTransfer;
@@ -57,9 +58,9 @@ public class TransactionService {
                     .build();
         }
 
-        String transactionId = internalTransfer.internalFundTransfer(fromAccount, toAccount, transferRequest.getAmmount());
+        String transactionId = internalTransfer.internalFundTransfer(fromAccount, toAccount, transferRequest.getAmmount(), transferRequest );
 
-        log.info("Transaction ID: {} succes", transactionId);
+        log.info(" Transaction ID: {} success", transactionId);
 
         return TransferResponse.builder().message("Transaction successfully completed")
                 .transferId(transferRequest.getTransferId())
@@ -96,12 +97,30 @@ public class TransactionService {
                 .transactionId(transactionId)
                 .build();
 
+    }
 
+    public TransferResponse getSavedTransaction(TransferRequest request){
+        List<TransactionEntity> transactionList = transactionRepository.findByTransferId(request.getTransferId());
+
+        if(transactionList.size() != 0) {
+            System.out.println("Найден Idempotency-Key. Отдаю трансакцию из Базы. Транзакция найдена.");
+            TransactionEntity transaction = transactionList.get(0);
+
+            return TransferResponse.builder()
+                    .transferId(transaction.getTransferId())
+                    .message("Transaction successfully completed")
+                    .transactionId(transaction.getTransactionId())
+                    .build();
+        }
+        System.out.println("Найден Idempotency-Key. Отдаю трансакцию из Базы. Транзакция не найдена.");
+        return TransferResponse.builder()
+                .message("Transaction not completed")
+                .transferId(request.getTransferId())
+                .build();
     }
 
     private boolean validateBalance(AccountBank accountBank, BigDecimal ammount){
         if(accountBank.getAvailableBalance().compareTo(BigDecimal.ZERO) < 0 || accountBank.getAvailableBalance().compareTo(ammount) < 0){
-//            throw new InsufficientFundsException("Insufficient funds in the account " + accountBank.getNumber(), GlobalErrorCode.INSUFFICIENT_FUNDS);
             return false;
         }
         return true;
@@ -111,7 +130,4 @@ public class TransactionService {
         Optional<AccountEntity> entity = accountRepository.findByNumber(accountNumber);
         return entity.isPresent();
     }
-
-
-
 }

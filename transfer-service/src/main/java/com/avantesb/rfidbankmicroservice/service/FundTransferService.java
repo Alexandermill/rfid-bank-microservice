@@ -12,6 +12,7 @@ import com.avantesb.rfidbankmicroservice.service.client.CoreFeignClient;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.stream.function.StreamBridge;
@@ -19,7 +20,12 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.temporal.TemporalField;
+import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 @Slf4j
 @Service
@@ -47,19 +53,39 @@ public class FundTransferService {
         TransferEntity optFundTransfer = fundTransferRepository.save(entity);
         request.setTransferId(optFundTransfer.getId());
 
-        Boolean send = streamBridge.send("sendTransfer-out-0", MessageBuilder.withPayload(request).build());
+        Boolean send = streamBridge.send("sendTransfer-out-0", MessageBuilder
+                    .withPayload(request)
+                    .setHeader("Idempotency-Key", idempotencyKey(request))
+                    .build());
 
         log.info("Sending fund transfer request {}, status: {}" + request.toString(), send);
+
+        System.out.println("Key:  " + idempotencyKey(request));
 
         return RestTransferResponse.builder().transferId(optFundTransfer.getId())
                 .message("STATUS: PENDING")
                 .link("http://"+host+":"+port+"/api/v1/transfer/"+optFundTransfer.getId())
                 .build();
 
-//        return FundTransferResponse.builder().message("Fund Transfer Pending")
-//                .transferId(optFundTransfer.getId())
-//                .build();
 
+    }
+
+    public String idempotencyKey(@NotNull TransferRequest request){
+        String hash = ""
+                + request.getTransferId()
+                + request.getFromAccount()
+                + request.getToAccount()
+                + request.getAmmount();
+
+        LocalDateTime time = LocalDateTime.now();
+        int day = time.getDayOfYear();
+        int hour = time.getHour();
+        int minute = time.getMinute();
+
+        String keyString = ""+hash.hashCode()+day+hour;
+        UUID key = UUID.nameUUIDFromBytes(keyString.getBytes());
+        System.out.println("request ID: "+request.getTransferId()+ " key: "+ key.toString());
+        return key.toString();
     }
 
     public void updateTransfer(TransferResponse response){

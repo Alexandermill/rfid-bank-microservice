@@ -1,5 +1,5 @@
 package com.avantesb.rfidbankmicroservice.model;
 
 public enum TransactionStatus {
-    PENDING, PROCESSING, SUCCESS, FAILED
+    PENDING, PROCESSING, SUCCESS, FAILED, IDEMPOTENCY_ERROR
 }

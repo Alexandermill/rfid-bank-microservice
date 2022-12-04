@@ -8,6 +8,7 @@ import java.math.BigDecimal;
 @Data
 public class TransactionBank {
     private Long id;
+    private Long transferId;
     private BigDecimal ammount;
     private TransactionType transactionType;
     private String referenceNumber;

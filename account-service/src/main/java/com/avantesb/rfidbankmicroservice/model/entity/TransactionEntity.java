@@ -18,6 +18,7 @@ public class TransactionEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    private Long transferId;
 
     private BigDecimal ammount;
 

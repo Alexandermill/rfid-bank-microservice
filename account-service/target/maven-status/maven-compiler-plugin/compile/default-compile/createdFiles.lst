@@ -15,9 +15,11 @@ com\avantesb\rfidbankmicroservice\exceptions\InsufficientFundsException.class
 com\avantesb\rfidbankmicroservice\controller\AccountController.class
 com\avantesb\rfidbankmicroservice\exceptions\EntityNotFoundException.class
 com\avantesb\rfidbankmicroservice\exceptions\ErrorResponse.class
+com\avantesb\rfidbankmicroservice\model\entity\IdempotencyKey$IdempotencyKeyBuilder.class
 com\avantesb\rfidbankmicroservice\AccountServiceApp.class
 com\avantesb\rfidbankmicroservice\model\dto\TransactionBank.class
 com\avantesb\rfidbankmicroservice\exceptions\SimpleBankingGlobalException.class
+com\avantesb\rfidbankmicroservice\model\entity\IdempotencyKey.class
 com\avantesb\rfidbankmicroservice\configuration\CustomFeignClientConfiguration.class
 com\avantesb\rfidbankmicroservice\model\request\TransferRequest.class
 com\avantesb\rfidbankmicroservice\model\dto\ClientBank.class
@@ -32,8 +34,10 @@ com\avantesb\rfidbankmicroservice\sevice\TransactionService.class
 com\avantesb\rfidbankmicroservice\sevice\InternalTransaction.class
 com\avantesb\rfidbankmicroservice\model\mapper\UtilAccountMapper.class
 com\avantesb\rfidbankmicroservice\model\entity\TransactionEntity.class
+com\avantesb\rfidbankmicroservice\configuration\ReddisConfiguration.class
 com\avantesb\rfidbankmicroservice\model\constant\AccountType.class
 com\avantesb\rfidbankmicroservice\model\entity\UtilityAccountEntity.class
 com\avantesb\rfidbankmicroservice\model\response\TransferResponse.class
 com\avantesb\rfidbankmicroservice\sevice\AccountService.class
+com\avantesb\rfidbankmicroservice\model\repository\IdempKeyRepository.class
 com\avantesb\rfidbankmicroservice\model\constant\AccountStatus.class

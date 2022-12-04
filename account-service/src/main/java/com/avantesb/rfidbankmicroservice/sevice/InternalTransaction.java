@@ -7,6 +7,7 @@ import com.avantesb.rfidbankmicroservice.model.entity.AccountEntity;
 import com.avantesb.rfidbankmicroservice.model.entity.TransactionEntity;
 import com.avantesb.rfidbankmicroservice.model.repository.AccountEntityRepository;
 import com.avantesb.rfidbankmicroservice.model.repository.TransactionEntityRepository;
+import com.avantesb.rfidbankmicroservice.model.request.TransferRequest;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -20,7 +21,7 @@ public class InternalTransaction {
     private AccountEntityRepository accountRepository;
     private TransactionEntityRepository transactionRepository;
 
-    public String internalFundTransfer(AccountBank fromAccount, AccountBank toAccount, BigDecimal ammount){
+    public String internalFundTransfer(AccountBank fromAccount, AccountBank toAccount, BigDecimal ammount, TransferRequest request){
         String transactionId = UUID.randomUUID().toString();
 
         AccountEntity fromAccountEntity = accountRepository.findByNumber(fromAccount.getNumber())
@@ -37,6 +38,7 @@ public class InternalTransaction {
                 .account(fromAccountEntity)
                 .transactionId(transactionId)
                 .ammount(ammount.negate())
+                .transferId(request.getTransferId())
                 .build());
 
         toAccountEntity.setAvailableBalance(toAccountEntity.getAvailableBalance().add(ammount));
@@ -45,9 +47,10 @@ public class InternalTransaction {
 
         transactionRepository.save(TransactionEntity.builder().transactionType(TransactionType.FUND_TRANSFER)
                 .referenceNumber(toAccountEntity.getNumber())
-                .account(fromAccountEntity)
+                .account(toAccountEntity)
                 .transactionId(transactionId)
                 .ammount(ammount)
+                .transferId(request.getTransferId())
                 .build());
 
         return transactionId;
