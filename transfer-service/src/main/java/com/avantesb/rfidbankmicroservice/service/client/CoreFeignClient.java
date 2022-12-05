@@ -13,9 +13,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @LoadBalancerClient(value = "account-bank-service", configuration = LoadBalancerConfiguration.class)
 public interface CoreFeignClient {
 
-//    @RequestMapping(path = "/api/v1/account/bank-account/{account_number}", method = RequestMethod.GET)
-//    AccountResponse readAccount(@PathVariable("account_number") String accountNumber);
-
     @RequestMapping(value = "/api/v1/transaction/fund-transfer", method = RequestMethod.POST)
     TransferResponse fundTransfer(@RequestBody TransferRequest request);
 }

@@ -8,20 +8,28 @@ import com.avantesb.rfidbankmicroservice.model.entity.TransactionEntity;
 import com.avantesb.rfidbankmicroservice.model.repository.AccountEntityRepository;
 import com.avantesb.rfidbankmicroservice.model.repository.TransactionEntityRepository;
 import com.avantesb.rfidbankmicroservice.model.request.TransferRequest;
-import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.util.UUID;
 
 @Service
-@AllArgsConstructor
 public class InternalTransaction {
 
-    private AccountEntityRepository accountRepository;
-    private TransactionEntityRepository transactionRepository;
+    private final AccountEntityRepository accountRepository;
+    private final TransactionEntityRepository transactionRepository;
 
-    public String internalFundTransfer(AccountBank fromAccount, AccountBank toAccount, BigDecimal ammount, TransferRequest request){
+    @Autowired
+    public InternalTransaction(AccountEntityRepository accountRepository, TransactionEntityRepository transactionRepository) {
+        this.accountRepository = accountRepository;
+        this.transactionRepository = transactionRepository;
+    }
+
+
+    @Transactional(rollbackFor = Exception.class)
+    public String internalFundTransfer(AccountBank fromAccount, AccountBank toAccount, BigDecimal ammount, TransferRequest request) throws Exception {
         String transactionId = UUID.randomUUID().toString();
 
         AccountEntity fromAccountEntity = accountRepository.findByNumber(fromAccount.getNumber())

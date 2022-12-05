@@ -16,7 +16,10 @@ public class MessageService {
 
     @Bean
     Consumer<TransferResponse> transactionStatus(){
+
         return response -> transferService.updateTransfer(response);
     }
+
+
 
 }

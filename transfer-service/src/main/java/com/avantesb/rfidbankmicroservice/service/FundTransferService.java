@@ -3,12 +3,11 @@ package com.avantesb.rfidbankmicroservice.service;
 import com.avantesb.rfidbankmicroservice.model.TransactionStatus;
 import com.avantesb.rfidbankmicroservice.model.dto.FundTransfer;
 import com.avantesb.rfidbankmicroservice.model.dto.request.TransferRequest;
-import com.avantesb.rfidbankmicroservice.model.dto.response.TransferResponse;
 import com.avantesb.rfidbankmicroservice.model.dto.response.RestTransferResponse;
+import com.avantesb.rfidbankmicroservice.model.dto.response.TransferResponse;
 import com.avantesb.rfidbankmicroservice.model.entity.TransferEntity;
 import com.avantesb.rfidbankmicroservice.model.mapper.TransferMapper;
 import com.avantesb.rfidbankmicroservice.model.repository.TransferEntityRepository;
-import com.avantesb.rfidbankmicroservice.service.client.CoreFeignClient;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -21,9 +20,6 @@ import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.time.temporal.TemporalField;
-import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -39,13 +35,10 @@ public class FundTransferService {
     private String port;
 
     private final TransferEntityRepository fundTransferRepository;
-    private final CoreFeignClient coreFeignClient;
     private final StreamBridge streamBridge;
     private final TransferMapper transferMapper;
 
     public RestTransferResponse initFundTransfer(TransferRequest request){
-
-
 
         TransferEntity entity = new TransferEntity();
         BeanUtils.copyProperties(request, entity);
@@ -58,15 +51,12 @@ public class FundTransferService {
                     .setHeader("Idempotency-Key", idempotencyKey(request))
                     .build());
 
-        log.info("Sending fund transfer request {}, status: {}" + request, send);
-
-        System.out.println("Key:  " + idempotencyKey(request));
+        log.info("Sending fund transfer request ID: {}, status: {}", request.getTransferId(), send);
 
         return RestTransferResponse.builder().transferId(optFundTransfer.getId())
                 .message("STATUS: PENDING")
                 .link("http://"+host+":"+port+"/api/v1/transfer/"+optFundTransfer.getId())
                 .build();
-
 
     }
 
@@ -90,7 +80,7 @@ public class FundTransferService {
 
     public void updateTransfer(TransferResponse response){
 
-        log.info("Transfer ID: {} message: {} transaction ID: {}", response.getTransferId(),
+        log.info("Update Transfer ID: {} message: {} transaction ID: {}", response.getTransferId(),
                 response.getMessage(),
                 response.getTransactionId());
 

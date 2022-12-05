@@ -4,7 +4,6 @@ com\avantesb\rfidbankmicroservice\model\repository\TransactionEntityRepository.c
 com\avantesb\rfidbankmicroservice\model\dto\UtilAccountBank.class
 com\avantesb\rfidbankmicroservice\model\mapper\BaseMapper.class
 com\avantesb\rfidbankmicroservice\model\request\UtilityPaymentRequest.class
-com\avantesb\rfidbankmicroservice\sevice\AccountServiceImpl.class
 com\avantesb\rfidbankmicroservice\model\response\TransferResponse$TransferResponseBuilder.class
 com\avantesb\rfidbankmicroservice\model\response\UtilityPaymentResponse.class
 com\avantesb\rfidbankmicroservice\model\entity\TransactionEntity$TransactionEntityBuilder.class

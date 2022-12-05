@@ -26,6 +26,8 @@ spring:
         commitTransaction-in-0:
           destination: transfer
           group: transactionInit
+          consumer:
+            headerMode: headers
         commitTransaction-out-0:
           destination: transfer
       rabbit:
@@ -46,6 +48,7 @@ spring:
               routingKeyExpression: '''accounts'''
           commitTransaction-in-0:
             consumer:
+#              acknowledgeMode: manual
               bindQueue: false
               declareExchange: false
               queueNameGroupOnly: true

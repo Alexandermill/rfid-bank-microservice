@@ -15,6 +15,7 @@ import com.avantesb.rfidbankmicroservice.model.response.UtilityPaymentResponse;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -33,8 +34,9 @@ public class TransactionService {
 
 
 
-    public TransferResponse fundTransfer(TransferRequest transferRequest){
 
+    public TransferResponse fundTransfer(TransferRequest transferRequest){
+        System.out.println("=================START Transaction SERVICE=================");
         if(!accountExist(transferRequest.getFromAccount())){
             log.info("Transfer ID: {} failed. Account from {} not found", transferRequest.getTransferId(), transferRequest.getFromAccount());
             return TransferResponse.builder().message("Transaction failed. Account from not found")
@@ -58,9 +60,16 @@ public class TransactionService {
                     .build();
         }
 
-        String transactionId = internalTransfer.internalFundTransfer(fromAccount, toAccount, transferRequest.getAmmount(), transferRequest );
+        String transactionId = null;
+        try {
+            transactionId = internalTransfer.internalFundTransfer(fromAccount, toAccount, transferRequest.getAmmount(), transferRequest );
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         log.info(" Transaction ID: {} success", transactionId);
+
+        System.out.println("=================FINISH Transaction SERVICE=================");
 
         return TransferResponse.builder().message("Transaction successfully completed")
                 .transferId(transferRequest.getTransferId())

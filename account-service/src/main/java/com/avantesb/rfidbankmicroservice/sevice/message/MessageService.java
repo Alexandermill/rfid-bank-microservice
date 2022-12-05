@@ -9,9 +9,15 @@ import com.avantesb.rfidbankmicroservice.model.response.TransferResponse;
 import com.avantesb.rfidbankmicroservice.sevice.AccountService;
 import com.avantesb.rfidbankmicroservice.sevice.TransactionService;
 import lombok.AllArgsConstructor;
+import org.springframework.amqp.core.AcknowledgeMode;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
+import org.springframework.integration.StaticMessageHeaderAccessor;
+import org.springframework.integration.acks.AckUtils;
+import org.springframework.integration.acks.AcknowledgmentCallback;
+import org.springframework.integration.acks.SimpleAcknowledgment;
 import org.springframework.messaging.Message;
+import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -42,6 +48,7 @@ public class MessageService {
         return message -> {
             System.out.println("in Reddis: \n"+ idempKeyRepository.findAll());
 
+
             String key = message.getHeaders().get("Idempotency-Key", String.class);
             Optional<IdempotencyKey> idempotencyKeyOptional = idempKeyRepository.findById(key);
             if(idempotencyKeyOptional.isPresent()){
@@ -52,6 +59,7 @@ public class MessageService {
 //                        .build();
                 return transactionService.getSavedTransaction(message.getPayload());
             }
+
             TransferResponse response = transactionService.fundTransfer(message.getPayload());
             IdempotencyKey idempotencyKey = IdempotencyKey.builder()
                     .key(key)
@@ -59,6 +67,7 @@ public class MessageService {
                     .expiration(120L)
                     .build();
             idempKeyRepository.save(idempotencyKey);
+
             return response;
         };
     }
