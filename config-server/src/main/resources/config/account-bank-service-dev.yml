@@ -27,7 +27,8 @@ spring:
           destination: transfer
           group: transactionInit
           consumer:
-            headerMode: headers
+            max-attempts: 5
+
         commitTransaction-out-0:
           destination: transfer
       rabbit:
@@ -48,12 +49,14 @@ spring:
               routingKeyExpression: '''accounts'''
           commitTransaction-in-0:
             consumer:
-#              acknowledgeMode: manual
+              acknowledgeMode: manual
               bindQueue: false
               declareExchange: false
               queueNameGroupOnly: true
               exchangeType: direct
               bindingRoutingKey: transactionInit
+              autoBindDlq: true
+              dlqTtl: 10000
           commitTransaction-out-0:
             producer:
               bindQueue: false
