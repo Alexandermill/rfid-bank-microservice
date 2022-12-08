@@ -12,10 +12,9 @@ import com.avantesb.rfidbankmicroservice.model.request.TransferRequest;
 import com.avantesb.rfidbankmicroservice.model.request.UtilityPaymentRequest;
 import com.avantesb.rfidbankmicroservice.model.response.TransferResponse;
 import com.avantesb.rfidbankmicroservice.model.response.UtilityPaymentResponse;
-import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -24,7 +23,6 @@ import java.util.UUID;
 
 @Slf4j
 @Service
-@AllArgsConstructor
 public class TransactionService {
 
     private AccountService accountService;
@@ -32,10 +30,16 @@ public class TransactionService {
     private TransactionEntityRepository transactionRepository;
     private InternalTransaction internalTransfer;
 
+    @Autowired
+    public TransactionService(AccountService accountService, AccountEntityRepository accountRepository, TransactionEntityRepository transactionRepository, InternalTransaction internalTransfer) {
+        this.accountService = accountService;
+        this.accountRepository = accountRepository;
+        this.transactionRepository = transactionRepository;
+        this.internalTransfer = internalTransfer;
+    }
 
 
-
-    public TransferResponse fundTransfer(TransferRequest transferRequest){
+    public TransferResponse fundTransfer(TransferRequest transferRequest) {
         System.out.println("=================START Transaction SERVICE=================");
         if(!accountExist(transferRequest.getFromAccount())){
             log.info("Transfer ID: {} failed. Account from {} not found", transferRequest.getTransferId(), transferRequest.getFromAccount());
@@ -67,6 +71,10 @@ public class TransactionService {
             e.printStackTrace();
         }
 
+        if(transferRequest.getAmmount().doubleValue() == 101){
+            System.out.println("!!!!!!!!!!!FAILED TRANSFER");
+            throw new RuntimeException("Ooops");
+        }
         log.info(" Transaction ID: {} success", transactionId);
 
         System.out.println("=================FINISH Transaction SERVICE=================");

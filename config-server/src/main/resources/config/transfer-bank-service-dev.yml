@@ -21,8 +21,6 @@ spring:
           group: transactionStatus
         sendTransfer-out-0:
           destination: transfer
-          producer:
-            max-attempts: 5
       rabbit:
         bindings:
           transactionStatus-in-0:

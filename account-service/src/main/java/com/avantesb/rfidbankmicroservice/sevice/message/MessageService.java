@@ -16,6 +16,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.messaging.Message;
 import org.springframework.stereotype.Component;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Function;
@@ -66,11 +67,12 @@ public class MessageService {
             IdempotencyKey idempotencyKey = IdempotencyKey.builder()
                     .key(key)
                     .request(message.getPayload())
-                    .expiration(120L)
+                    .expiration(IDEMPOTENCY_KEY_TTL)
                     .build();
             idempKeyRepository.save(idempotencyKey);
 
-                ackMessage(channel, deliveryTag);
+            ackMessage(channel, deliveryTag);
+
             return response;
         };
     }

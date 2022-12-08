@@ -7,6 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.cloud.stream.function.StreamBridge;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
+import org.springframework.messaging.Message;
 import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.web.bind.annotation.*;
 
@@ -65,6 +66,22 @@ public class TransferController {
                 .setHeader("Idempotency-Key", key)
                 .build());
 
+        return "send";
+    }
+
+    @GetMapping("/multisend")
+    public String multisend(){
+
+        for (int i = 1; i < 101; i++) {
+
+            Long id = Long.valueOf(i);
+            TransferRequest request = new TransferRequest(id,
+                    "100015003002",
+                    "100015003001", BigDecimal.valueOf(i));
+
+            fundTransferService.initFundTransfer(request);
+
+        }
         return "send";
     }
 

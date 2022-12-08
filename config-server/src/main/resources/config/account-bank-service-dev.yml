@@ -26,9 +26,6 @@ spring:
         commitTransaction-in-0:
           destination: transfer
           group: transactionInit
-          consumer:
-            max-attempts: 5
-
         commitTransaction-out-0:
           destination: transfer
       rabbit:
@@ -56,7 +53,6 @@ spring:
               exchangeType: direct
               bindingRoutingKey: transactionInit
               autoBindDlq: true
-              dlqTtl: 10000
           commitTransaction-out-0:
             producer:
               bindQueue: false
