@@ -1,4 +1,4 @@
-package com.avantesb.rfidbankmicroservice.model.request;
+package com.avantesb.rfidbankmicroservice.model.dto.request;
 
 import lombok.Builder;
 import lombok.Data;

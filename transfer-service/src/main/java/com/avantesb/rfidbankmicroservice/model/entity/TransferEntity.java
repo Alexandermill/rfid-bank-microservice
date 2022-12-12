@@ -19,9 +19,9 @@ public class TransferEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
 
-    String transactionReference;
-    String fromAccount;
-    String toAccount;
+    private String transactionReference;
+    private String fromAccount;
+    private String toAccount;
     private BigDecimal ammount;
 
     @Enumerated(EnumType.STRING)

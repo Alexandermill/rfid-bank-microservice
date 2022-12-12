@@ -1,33 +1,33 @@
 package com.avantesb.rfidbankmicroservice.model.entity;
 
-import com.avantesb.rfidbankmicroservice.model.TransactionStatus;
+import com.avantesb.rfidbankmicroservice.model.CardStstus;
+import com.avantesb.rfidbankmicroservice.model.CardType;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.math.BigDecimal;
-import java.util.UUID;
-
 @Entity
-@Getter
-@Setter
+@Table(name = "card")
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "atm_transfer")
-public class CashTransferEntity {
+@Getter
+@Setter
+public class CardEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    UUID id;
-
+    private Long id;
+    @Column(unique = true)
     private String cardNumber;
-    private String transactionReference;
-    private BigDecimal ammount;
+    private String accountNumber;
 
     @Enumerated(EnumType.STRING)
-    private TransactionStatus status;
+    private CardStstus cardStstus;
+
+    @Enumerated(EnumType.STRING)
+    private CardType cardType;
 
 
 }

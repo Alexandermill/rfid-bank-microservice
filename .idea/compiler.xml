@@ -9,6 +9,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="config-server" />
         <module name="ATM-sevice" />
+        <module name="card-service" />
         <module name="account-service" />
         <module name="eureka-server" />
         <module name="transfer-service" />

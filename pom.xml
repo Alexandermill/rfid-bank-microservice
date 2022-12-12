@@ -14,6 +14,7 @@
       <module>client-service</module>
       <module>config-server</module>
     <module>ATM-sevice</module>
+      <module>card-service</module>
   </modules>
 
   <name>rfidbankmicroservice</name>

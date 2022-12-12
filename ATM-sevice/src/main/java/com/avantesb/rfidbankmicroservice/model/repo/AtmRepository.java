@@ -5,5 +5,5 @@ import org.springframework.data.repository.CrudRepository;
 
 import java.util.UUID;
 
-public interface AtmRepository extends CrudRepository<UUID, AtmEntity> {
+public interface AtmRepository extends CrudRepository<AtmEntity, UUID> {
 }

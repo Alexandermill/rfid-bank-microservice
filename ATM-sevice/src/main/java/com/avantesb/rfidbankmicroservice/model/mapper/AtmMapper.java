@@ -3,7 +3,9 @@ package com.avantesb.rfidbankmicroservice.model.mapper;
 import com.avantesb.rfidbankmicroservice.model.dto.AtmDTO;
 import com.avantesb.rfidbankmicroservice.model.entity.AtmEntity;
 import org.springframework.beans.BeanUtils;
+import org.springframework.stereotype.Component;
 
+@Component
 public class AtmMapper extends BaseMapper<AtmEntity, AtmDTO>{
 
     @Override
