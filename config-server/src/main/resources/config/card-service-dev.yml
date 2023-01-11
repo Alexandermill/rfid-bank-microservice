@@ -14,29 +14,29 @@ spring:
       reactive:
         enabled: false
     stream:
-      definition: sendTransfer;transactionStatus
+      definition: cardTransfer;updateCardTransfer
       bindings:
-        transactionStatus-in-0:
-          destination: transfer
-          group: transactionStatus
-        sendTransfer-out-0:
+        cardTransfer-in-0:
+          destination: atm
+          group: initAtmTransfer
+        cardTransfer-out-0:
           destination: transfer
       rabbit:
         bindings:
-          transactionStatus-in-0:
+          cardTransfer-in-0:
             consumer:
               bindQueue: false
-              declareExchange: false
+#              declareExchange: false
               queueNameGroupOnly: true
               exchangeType: direct
-              bindingRoutingKey: transactionStatus
-          sendTransfer-out-0:
+              bindingRoutingKey: initAtmTransfer
+          cardTransfer-out-0:
             producer:
               bindQueue: false
-              declareExchange: false
+#              declareExchange: false
               queueNameGroupOnly: true
               exchangeType: direct
-              routingKeyExpression: '''transactionInit'''
+              routingKeyExpression: '''initCardTransfer'''
 
 
   rabbitmq:
