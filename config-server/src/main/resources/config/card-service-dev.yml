@@ -1,7 +1,7 @@
 spring:
   datasource:
 #    url: jdbc:h2:file:/database/core_rfid_bank
-    url: jdbc:h2:mem:ATM
+    url: jdbc:h2:mem:card
     username: sa
     password: password
     driverClassName: org.h2.Driver
@@ -10,30 +10,34 @@ spring:
   h2:
     console.enabled: true
   cloud:
+    discovery:
+      reactive:
+        enabled: false
     stream:
       definition: sendTransfer;transactionStatus
       bindings:
         transactionStatus-in-0:
           destination: transfer
-          group: cardTransferInit
+          group: transactionStatus
         sendTransfer-out-0:
-          destination: atm
+          destination: transfer
       rabbit:
         bindings:
           transactionStatus-in-0:
             consumer:
               bindQueue: false
-#              declareExchange: false
+              declareExchange: false
               queueNameGroupOnly: true
               exchangeType: direct
-              bindingRoutingKey: updateCardTransfer
+              bindingRoutingKey: transactionStatus
           sendTransfer-out-0:
             producer:
               bindQueue: false
-#              declareExchange: false
+              declareExchange: false
               queueNameGroupOnly: true
               exchangeType: direct
-              routingKeyExpression: '''initAtmTransfer'''
+              routingKeyExpression: '''transactionInit'''
+
 
   rabbitmq:
     host: 127.0.0.1

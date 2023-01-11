@@ -28,9 +28,9 @@ public class MessageService {
     @Value("${idempotencyKey.ttl:120}")
     private Long IDEMPOTENCY_KEY_TTL;
 
-    private AccountService accountService;
-    private TransactionService transactionService;
-    private IdempKeyRepository idempKeyRepository;
+    private final AccountService accountService;
+    private final TransactionService transactionService;
+    private final IdempKeyRepository idempKeyRepository;
 
     public MessageService(AccountService accountService, TransactionService transactionService, IdempKeyRepository idempKeyRepository) {
         this.accountService = accountService;

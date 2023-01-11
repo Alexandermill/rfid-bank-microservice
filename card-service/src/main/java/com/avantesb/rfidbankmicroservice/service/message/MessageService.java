@@ -2,12 +2,14 @@ package com.avantesb.rfidbankmicroservice.service.message;
 
 import com.avantesb.rfidbankmicroservice.model.dto.request.CardTransferRequest;
 import com.avantesb.rfidbankmicroservice.model.dto.request.CashTransferRequest;
+import com.avantesb.rfidbankmicroservice.model.dto.response.CardTransferResponse;
 import com.avantesb.rfidbankmicroservice.service.CardService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.messaging.Message;
 import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.stereotype.Component;
 
+import java.util.function.Consumer;
 import java.util.function.Function;
 
 @Component
@@ -27,6 +29,11 @@ public class MessageService {
                     .setHeader("Idempotency-Key", input.getHeaders().get("Idempotency-Key"))
                     .build();
         };
+    }
+
+    @Bean
+    Consumer<CardTransferResponse> updateCardTransfer(){
+        return input -> cardService.updateTransfer(input);
     }
 
 }
