@@ -12,7 +12,6 @@ import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
-import org.springframework.cloud.stream.function.StreamBridge;
 import org.springframework.stereotype.Service;
 
 @Slf4j
@@ -23,12 +22,12 @@ public class CardService {
     private final CardRepository cardRepository;
     private final CardTransactionRepository cardTransactionRepository;
 
-    public Boolean cardExist(String cardNumber){
+    public Boolean cardExist(String cardNumber) {
 
         return cardRepository.existsCardEntityByCardNumber(cardNumber);
     }
 
-    public CardTransferRequest cardTransfer (CashTransferRequest request){
+    public CardTransferRequest cardTransfer(CashTransferRequest request) {
 
         CardEntity card = cardRepository.findByCardNumber(request.getCardNumber())
                 .orElseThrow(() -> {
@@ -54,7 +53,7 @@ public class CardService {
                 .build();
     }
 
-    public void updateTransfer(CardTransferResponse response){
+    public void updateTransfer(CardTransferResponse response) {
 
         log.info("Update Transfer ID: {} message: {} transaction ID: {}", response.getTransferId(),
                 response.getMessage(),
@@ -66,13 +65,12 @@ public class CardService {
         updatedEntity.setReferenceId(response.getTransactionId());
         updatedEntity.setStatus(TransactionStatus.SUCCESS);
 
-        if(response.getTransactionId() == null){
+        if (response.getTransactionId() == null) {
             updatedEntity.setStatus(TransactionStatus.FAILED);
         }
 
         cardTransactionRepository.save(updatedEntity);
     }
-
 
 
 }
