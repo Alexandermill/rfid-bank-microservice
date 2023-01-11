@@ -1,4 +1,6 @@
 account-service/target/
+card-service/target/
+ATM-sevice/target
 client-service/target/
 config-server/target/
 transfer-service/target/
@@ -39,3 +41,5 @@ build/
 
 /ATM-sevice/src/test/
 /ATM-sevice/target/
+/.idea/
+/.jpb/
