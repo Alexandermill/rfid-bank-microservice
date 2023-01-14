@@ -15,7 +15,7 @@ spring:
       bindings:
         transactionStatus-in-0:
           destination: transfer
-          group: cardTransferInit
+          group: transactionStatusAtm
         sendTransfer-out-0:
           destination: atm
       rabbit:
