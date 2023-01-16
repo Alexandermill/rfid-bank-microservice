@@ -1,0 +1,7 @@
+16/01/2023
+
+1. Сделать TransferRequest/Response универсальными - добавить поле Type
+2. Сделать Сервис-Класс с методами для CardTransfer дл TransferRequest с типом Card
+3. Или сделать класс обертку, которая будет выбирать с каким Сервисом (CardTransfer, FundTransfer) работать в зависимости от Type в TransferRequest
+4. Сделать обработку type в response от AccountServiceApp во всех микросервисах
+5. Сделать метод cash в ATM синхронным через блокингОчередь.
