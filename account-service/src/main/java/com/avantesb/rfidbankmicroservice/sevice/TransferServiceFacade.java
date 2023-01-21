@@ -1,10 +1,9 @@
 package com.avantesb.rfidbankmicroservice.sevice;
 
-import org.springframework.stereotype.Service;
-
 import com.avantesb.rfidbankmicroservice.model.constant.TransferType;
 import com.avantesb.rfidbankmicroservice.model.request.TransferRequest;
-import com.avantesb.rfidbankmicroservice.model.response.TransferResponseUUID;
+import com.avantesb.rfidbankmicroservice.model.response.TransferResponse;
+import org.springframework.stereotype.Service;
 
 @Service
 public class TransferServiceFacade {
@@ -17,15 +16,14 @@ public class TransferServiceFacade {
         this.cardTransferService = cardTransferService;
     }
 
-    public TransferResponseUUID initTransaction (TransferType type, TransferRequest request){
+    public TransferResponse initTransactionByType (TransferType type, TransferRequest request){
         
         if(type == TransferType.FUND){
             transactionService.fundTransfer(request);
         }
 
-        if
 
-
+        return null;
     }
         
 }
