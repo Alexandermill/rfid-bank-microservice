@@ -1,6 +1,7 @@
 package com.avantesb.rfidbankmicroservice.sevice.message;
 
 
+import com.avantesb.rfidbankmicroservice.model.constant.TransferType;
 import com.avantesb.rfidbankmicroservice.model.dto.AccountBank;
 import com.avantesb.rfidbankmicroservice.model.entity.IdempotencyKey;
 import com.avantesb.rfidbankmicroservice.model.repository.IdempKeyRepository;
@@ -8,6 +9,7 @@ import com.avantesb.rfidbankmicroservice.model.request.TransferRequest;
 import com.avantesb.rfidbankmicroservice.model.response.TransferResponse;
 import com.avantesb.rfidbankmicroservice.sevice.AccountService;
 import com.avantesb.rfidbankmicroservice.sevice.TransactionService;
+import com.avantesb.rfidbankmicroservice.sevice.TransferServiceFacade;
 import com.rabbitmq.client.Channel;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.support.AmqpHeaders;
@@ -31,11 +33,13 @@ public class MessageService {
     private final AccountService accountService;
     private final TransactionService transactionService;
     private final IdempKeyRepository idempKeyRepository;
+    private final TransferServiceFacade transferService;
 
-    public MessageService(AccountService accountService, TransactionService transactionService, IdempKeyRepository idempKeyRepository) {
+    public MessageService(AccountService accountService, TransactionService transactionService, IdempKeyRepository idempKeyRepository, TransferServiceFacade transferService) {
         this.accountService = accountService;
         this.transactionService = transactionService;
         this.idempKeyRepository = idempKeyRepository;
+        this.transferService = transferService;
     }
 
     @Bean
@@ -63,7 +67,37 @@ public class MessageService {
                 return transactionService.getSavedTransaction(message.getPayload());
             }
 
-            TransferResponse response = transactionService.fundTransfer(message.getPayload());
+//            TransferResponse response = transactionService.fundTransfer(message.getPayload());
+            TransferResponse response = transferService.initTransactionByType(TransferType.FUND, message.getPayload());
+            IdempotencyKey idempotencyKey = IdempotencyKey.builder()
+                    .key(key)
+                    .request(message.getPayload())
+                    .expiration(IDEMPOTENCY_KEY_TTL)
+                    .build();
+            idempKeyRepository.save(idempotencyKey);
+
+            ackMessage(channel, deliveryTag);
+
+            return response;
+        };
+    }
+
+    @Bean
+    Function<Message<TransferRequest>, TransferResponse > commitCardTransaction(){
+        return message -> {
+
+            Channel channel = message.getHeaders().get(AmqpHeaders.CHANNEL, Channel.class);
+            Long deliveryTag = message.getHeaders().get(AmqpHeaders.DELIVERY_TAG, Long.class);
+
+            String key = message.getHeaders().get("Idempotency-Key", String.class);
+            Optional<IdempotencyKey> idempotencyKeyOptional = idempKeyRepository.findById(key);
+            if(idempotencyKeyOptional.isPresent()){
+
+                ackMessage(channel, deliveryTag);
+                return transactionService.getSavedTransaction(message.getPayload());
+            }
+
+            TransferResponse response = transferService.initTransactionByType(TransferType.CARD, message.getPayload());
             IdempotencyKey idempotencyKey = IdempotencyKey.builder()
                     .key(key)
                     .request(message.getPayload())

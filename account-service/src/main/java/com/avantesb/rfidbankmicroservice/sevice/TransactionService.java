@@ -12,6 +12,7 @@ import com.avantesb.rfidbankmicroservice.model.request.TransferRequest;
 import com.avantesb.rfidbankmicroservice.model.request.UtilityPaymentRequest;
 import com.avantesb.rfidbankmicroservice.model.response.TransferResponse;
 import com.avantesb.rfidbankmicroservice.model.response.UtilityPaymentResponse;
+import com.avantesb.rfidbankmicroservice.sevice.helpers.InternalTransaction;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

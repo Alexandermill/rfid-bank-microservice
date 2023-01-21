@@ -16,7 +16,7 @@ spring:
   cloud:
     stream:
       function:
-        definition: getAccounts; commitTransaction
+        definition: getAccounts; commitTransaction; commitCardTransaction
       bindings:
         getAccounts-in-0:
           destination: client
@@ -28,6 +28,9 @@ spring:
           group: transactionInit
         commitTransaction-out-0:
           destination: transfer
+        commitCardTransaction-in-0:
+          destination: transfer
+          group: transactionInit
       rabbit:
         bindings:
           getAccounts-in-0:

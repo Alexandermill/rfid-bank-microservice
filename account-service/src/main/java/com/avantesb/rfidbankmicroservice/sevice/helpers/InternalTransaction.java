@@ -1,4 +1,4 @@
-package com.avantesb.rfidbankmicroservice.sevice;
+package com.avantesb.rfidbankmicroservice.sevice.helpers;
 
 import com.avantesb.rfidbankmicroservice.exceptions.EntityNotFoundException;
 import com.avantesb.rfidbankmicroservice.model.constant.TransactionType;

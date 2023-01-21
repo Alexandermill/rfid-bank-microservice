@@ -1,5 +1,5 @@
 package com.avantesb.rfidbankmicroservice.model.constant;
 
 public enum TransactionType {
-    FUND_TRANSFER, UTILITY_PAYMENT
+    FUND_TRANSFER, UTILITY_PAYMENT, CARD_TRANSFER
 }
