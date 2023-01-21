@@ -5,12 +5,13 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
+import java.util.UUID;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class TransferRequest {
-    private Long transferId;
+    private String transferId;
     private String fromAccount;
     private String toAccount;
     private BigDecimal ammount;

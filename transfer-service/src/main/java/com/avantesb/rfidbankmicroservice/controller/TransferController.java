@@ -44,7 +44,7 @@ public class TransferController {
 
     @PostMapping("/test")
     public String testTransfer(
-            @RequestParam("transferId") Long transferId,
+            @RequestParam("transferId") String transferId,
             @RequestParam("from") String from,
             @RequestParam("to") String to,
             @RequestParam("ammount") BigDecimal ammount,
@@ -74,7 +74,7 @@ public class TransferController {
 
         for (int i = 1; i < 101; i++) {
 
-            Long id = Long.valueOf(i);
+            String id = UUID.randomUUID().toString();
             TransferRequest request = new TransferRequest(id,
                     "100015003002",
                     "100015003001", BigDecimal.valueOf(i));

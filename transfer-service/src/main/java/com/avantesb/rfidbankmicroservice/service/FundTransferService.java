@@ -43,8 +43,9 @@ public class FundTransferService {
         TransferEntity entity = new TransferEntity();
         BeanUtils.copyProperties(request, entity);
         entity.setStatus(TransactionStatus.PENDING);
-        TransferEntity optFundTransfer = fundTransferRepository.save(entity);
-        request.setTransferId(optFundTransfer.getId());
+        entity.setTransferId(UUID.randomUUID());
+        TransferEntity savedFundTransfer = fundTransferRepository.save(entity);
+        request.setTransferId(savedFundTransfer.getTransferId().toString());
 
         Boolean send = streamBridge.send("sendTransfer-out-0", MessageBuilder
                     .withPayload(request)
@@ -53,9 +54,9 @@ public class FundTransferService {
 
         log.info("Sending fund transfer request ID: {}, status: {}", request.getTransferId(), send);
 
-        return RestTransferResponse.builder().transferId(optFundTransfer.getId())
+        return RestTransferResponse.builder().transferId(savedFundTransfer.getTransferId().toString())
                 .message("STATUS: PENDING")
-                .link("http://"+host+":"+port+"/api/v1/transfer/"+optFundTransfer.getId())
+                .link("http://"+host+":"+port+"/api/v1/transfer/"+savedFundTransfer.getId())
                 .build();
 
     }
@@ -84,7 +85,7 @@ public class FundTransferService {
                 response.getMessage(),
                 response.getTransactionId());
 
-        TransferEntity updatedEntity = fundTransferRepository.findById(response.getTransferId())
+        TransferEntity updatedEntity = fundTransferRepository.findByTransferId(response.getTransferId())
                 .orElseThrow(EntityNotFoundException::new);
 
         updatedEntity.setTransactionReference(response.getTransactionId());

@@ -7,6 +7,7 @@ import lombok.ToString;
 
 import jakarta.persistence.*;
 import java.math.BigDecimal;
+import java.util.UUID;
 
 @ToString // TODO: 02.12.2022
 @Getter
@@ -17,8 +18,9 @@ public class TransferEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
+    private Long id;
 
+    private UUID transferId;
     private String transactionReference;
     private String fromAccount;
     private String toAccount;

@@ -8,5 +8,5 @@ import java.util.Optional;
 
 public interface TransactionEntityRepository extends JpaRepository<TransactionEntity, Long> {
 
-    List<TransactionEntity> findByTransferId(Long id);
+    List<TransactionEntity> findByTransferId(String id);
 }

@@ -9,7 +9,7 @@ import lombok.*;
 @ToString
 @Builder
 public class TransferResponse {
-    private Long transferId;
+    private String transferId;
     private String message;
     private String transactionId;
 }

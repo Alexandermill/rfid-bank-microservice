@@ -6,7 +6,7 @@ import lombok.Data;
 @Data
 @Builder
 public class TransferResponse {
-    private Long transferId;
+    private String transferId;
     private String message;
     private String transactionId;
 }
