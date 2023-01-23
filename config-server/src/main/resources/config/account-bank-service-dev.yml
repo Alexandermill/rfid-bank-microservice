@@ -30,7 +30,9 @@ spring:
           destination: transfer
         commitCardTransaction-in-0:
           destination: transfer
-          group: transactionInit
+          group: cardTransferInit
+        commitCardTransaction-out-0:
+          destination: transfer
       rabbit:
         bindings:
           getAccounts-in-0:
@@ -63,6 +65,22 @@ spring:
               queueNameGroupOnly: true
               exchangeType: direct
               routingKeyExpression: '''transactionStatus'''
+          commitCardTransaction-in-0:
+            consumer:
+              acknowledgeMode: manual
+              # bindQueue: false
+              # declareExchange: false
+              queueNameGroupOnly: true
+              exchangeType: direct
+              bindingRoutingKey: cardTransferInit
+              autoBindDlq: true
+          commitCardTransaction-out-0:
+            producer:
+              bindQueue: false
+              declareExchange: false
+              queueNameGroupOnly: true
+              exchangeType: direct
+              routingKeyExpression: '''updateCardTransfer'''
   rabbitmq:
     host: 127.0.0.1
     port: 5672
