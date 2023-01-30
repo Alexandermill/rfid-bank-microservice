@@ -1,7 +1,6 @@
 package com.avantesb.rfidbankmicroservice.sevice.helpers;
 
 import com.avantesb.rfidbankmicroservice.exceptions.EntityNotFoundException;
-import com.avantesb.rfidbankmicroservice.model.constant.ATMTransferType;
 import com.avantesb.rfidbankmicroservice.model.constant.TransactionType;
 import com.avantesb.rfidbankmicroservice.model.dto.AccountBank;
 import com.avantesb.rfidbankmicroservice.model.entity.AccountEntity;
@@ -13,7 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.math.BigDecimal;
 import java.util.UUID;
 
 @Service

@@ -20,7 +20,7 @@ public class CardTransfer {
     private UUID id;
 
     private String referenceId;
-    private UUID transferId;
+    private String transferId;
     private String cardNumber;
     private String accountNumber;
     private BigDecimal ammount;
