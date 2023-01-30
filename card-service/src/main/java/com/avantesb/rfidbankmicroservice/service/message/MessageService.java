@@ -2,6 +2,7 @@ package com.avantesb.rfidbankmicroservice.service.message;
 
 import com.avantesb.rfidbankmicroservice.model.dto.request.CardTransferRequest;
 import com.avantesb.rfidbankmicroservice.model.dto.request.CashTransferRequest;
+import com.avantesb.rfidbankmicroservice.model.dto.request.TransferRequest;
 import com.avantesb.rfidbankmicroservice.model.dto.response.CardTransferResponse;
 import com.avantesb.rfidbankmicroservice.service.CardService;
 import org.springframework.context.annotation.Bean;
@@ -22,7 +23,7 @@ public class MessageService {
     }
 
     @Bean
-    Function<Message<CashTransferRequest>, Message<CardTransferRequest>> cardTransfer(){
+    Function<Message<CashTransferRequest>, Message<TransferRequest>> cardTransfer(){
         return input -> {
             return MessageBuilder
                     .withPayload(cardService.cardTransfer(input.getPayload()))

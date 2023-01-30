@@ -3,6 +3,7 @@ package com.avantesb.rfidbankmicroservice.service;
 import com.avantesb.rfidbankmicroservice.model.TransactionStatus;
 import com.avantesb.rfidbankmicroservice.model.dto.request.CardTransferRequest;
 import com.avantesb.rfidbankmicroservice.model.dto.request.CashTransferRequest;
+import com.avantesb.rfidbankmicroservice.model.dto.request.TransferRequest;
 import com.avantesb.rfidbankmicroservice.model.dto.response.CardTransferResponse;
 import com.avantesb.rfidbankmicroservice.model.entity.CardEntity;
 import com.avantesb.rfidbankmicroservice.model.entity.CardTransfer;
@@ -27,7 +28,7 @@ public class CardService {
         return cardRepository.existsCardEntityByCardNumber(cardNumber);
     }
 
-    public CardTransferRequest cardTransfer(CashTransferRequest request) {
+    public TransferRequest cardTransfer(CashTransferRequest request) {
 
         CardEntity card = cardRepository.findByCardNumber(request.getCardNumber())
                 .orElseThrow(() -> {
@@ -46,11 +47,16 @@ public class CardService {
                 cardTransferInDB.getCardNumber(),
                 cardTransferInDB.getAmmount());
 
-        return CardTransferRequest.builder()
-                .accountNumber(cardTransferInDB.getAccountNumber())
-                .transferId(cardTransferInDB.getTransferId())
-                .ammount(cardTransferInDB.getAmmount())
-                .build();
+        return TransferRequest.builder()
+        .fromAccount(cardTransferInDB.getAccountNumber())
+        .transferId(cardTransferInDB.getTransferId().toString())
+        .ammount(cardTransferInDB.getAmmount())
+        .build();
+        // .builder()
+        //         .accountNumber(cardTransferInDB.getAccountNumber())
+        //         .transferId(cardTransferInDB.getTransferId())
+        //         .ammount(cardTransferInDB.getAmmount())
+        //         .build();
     }
 
     public void updateTransfer(CardTransferResponse response) {
